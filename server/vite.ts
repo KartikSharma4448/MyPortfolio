@@ -68,6 +68,7 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
+  // YEH NAYI WALI LINE HAI
   const distPath = path.resolve(import.meta.dirname, "..", "dist/public");
 
   if (!fs.existsSync(distPath)) {
