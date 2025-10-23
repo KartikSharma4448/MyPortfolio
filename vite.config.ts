@@ -2,11 +2,25 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import sitemap from 'vite-plugin-sitemap'; // <--- 1. YEH LINE ADD KAREIN
 
 export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
+    sitemap({ // <--- 2. YEH POORA BLOCK ADD KAREIN
+      hostname: 'https://kartiksharma.site',
+      dynamicRoutes: [
+        '/',
+        '/about',
+        '/projects',
+        '/services',
+        '/achievements',
+        '/blog',
+        '/contact',
+        '/social-links'
+      ]
+    }),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
