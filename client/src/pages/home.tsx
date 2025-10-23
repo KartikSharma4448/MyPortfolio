@@ -65,12 +65,11 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-4">
-              BCA Student | Aspiring Software Developer
+              Kartik Sharma Jaipur | Software Developer | Freelancer
             </p>
 
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-              Passionate About Coding & Problem-Solving. Building innovative
-              solutions and learning new technologies every day.
+              Software Developer & Freelancer in Jaipur, turning complex problems into elegant digital solutions. Explore my work and let's build something amazing together.
             </p>
 
             {/* CTA Buttons */}
