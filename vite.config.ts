@@ -20,8 +20,8 @@ export default defineConfig({
         '/contact',
         '/social-links'
       ],
-      // VIMP: YEH NAYI LINE ADD KARNI HAI
-      outDir: path.resolve(import.meta.dirname, "client", "public")
+      // YEH LINE UPDATE KARNI HAI (client/public ki jagah dist/public):
+      outDir: path.resolve(import.meta.dirname, "dist/public")
     }),
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
