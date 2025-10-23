@@ -107,7 +107,7 @@ export default function Home() {
                 </Button>
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/kartiksharma4448"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="link-github"
