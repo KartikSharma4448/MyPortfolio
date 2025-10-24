@@ -211,9 +211,9 @@ Primary spacing units: 4, 8, 12, 16, 20, 24, 32 (Tailwind scale)
 
 **Meta Tags (Every Page):**
 ```
-Title: "Kartik Sharma | BCA Student & Aspiring Software Developer"
-Description: "Portfolio of Kartik Sharma - BCA student passionate about software development, web design, and cloud computing. View projects, certifications, and services."
-Keywords: software developer, BCA student, web development, Jaipur developer
+Title: "Kartik Sharma Jaipur | Software Developer | Freelancer"
+Description: "Software Developer & Freelancer in Jaipur, turning complex problems into elegant digital solutions. Explore my work and let's build something amazing together."
+Keywords: Kartik Sharma, software developer portfolio, web development, Jaipur developer, cloud computing, Python developer, Java programmer, kartiksharma.site
 ```
 
 **Structured Data (JSON-LD):**
