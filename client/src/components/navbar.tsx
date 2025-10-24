@@ -46,26 +46,28 @@ export function Navbar() {
     >
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" data-testid="link-home">
-            <a className="text-xl font-bold tracking-tight hover-elevate active-elevate-2 px-2 py-1 rounded-md">
-              Kartik<span className="text-primary">.</span>
-            </a>
+          <Link
+            href="/"
+            data-testid="link-home"
+            className="text-xl font-bold tracking-tight hover-elevate active-elevate-2 px-2 py-1 rounded-md"
+          >
+            Kartik<span className="text-primary">.</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  data-testid={`link-nav-${link.label.toLowerCase().replace(" ", "-")}`}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 ${
-                    isActive(link.href)
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {link.label}
-                </a>
+              <Link
+                key={link.href}
+                href={link.href}
+                data-testid={`link-nav-${link.label.toLowerCase().replace(" ", "-")}`}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 ${
+                  isActive(link.href)
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
               </Link>
             ))}
           </div>
@@ -107,18 +109,18 @@ export function Navbar() {
           <div className="md:hidden py-4 border-t">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <a
-                    data-testid={`link-mobile-${link.label.toLowerCase().replace(" ", "-")}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 block ${
-                      isActive(link.href)
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  data-testid={`link-mobile-${link.label.toLowerCase().replace(" ", "-")}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 block ${
+                    isActive(link.href)
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {link.label}
                 </Link>
               ))}
               {user && (

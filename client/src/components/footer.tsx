@@ -21,25 +21,33 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold mb-4">Quick Links</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/about">
-                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2" data-testid="link-footer-about">
-                  About
-                </a>
+              <Link
+                href="/about"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2"
+                data-testid="link-footer-about"
+              >
+                About
               </Link>
-              <Link href="/projects">
-                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2" data-testid="link-footer-projects">
-                  Projects
-                </a>
+              <Link
+                href="/projects"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2"
+                data-testid="link-footer-projects"
+              >
+                Projects
               </Link>
-              <Link href="/services">
-                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2" data-testid="link-footer-services">
-                  Services
-                </a>
+              <Link
+                href="/services"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2"
+                data-testid="link-footer-services"
+              >
+                Services
               </Link>
-              <Link href="/contact">
-                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2" data-testid="link-footer-contact">
-                  Contact
-                </a>
+              <Link
+                href="/contact"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors hover-elevate px-2 py-1 rounded-md -ml-2"
+                data-testid="link-footer-contact"
+              >
+                Contact
               </Link>
             </div>
           </div>

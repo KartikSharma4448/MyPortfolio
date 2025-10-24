@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Switch, Route } from "wouter";
+import { Route, useLocation } from "wouter";
+import { AnimatePresence, motion } from "framer-motion";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -32,18 +33,38 @@ import NotFound from "@/pages/not-found";
 
 function Router() {
   useAnalytics();
-  
+  const [location] = useLocation();
+
+  const routes = {
+    "/": Home,
+    "/about": About,
+    "/achievements": Achievements,
+    "/projects": Projects,
+    "/services": Services,
+    "/contact": Contact,
+    "/social-links": SocialLinks,
+  };
+
+  const CurrentPage = routes[location as keyof typeof routes];
+
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/achievements" component={Achievements} />
-      <Route path="/projects" component={Projects} />
-      <Route path="/services" component={Services} />
+    <>
+      <AnimatePresence mode="wait">
+        {CurrentPage && (
+          <motion.div
+            key={location}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+          >
+            <CurrentPage />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/social-links" component={SocialLinks} />
       <Route path="/auth" component={AuthPage} />
       <ProtectedRoute path="/admin" component={Admin} />
       <ProtectedRoute path="/admin/projects" component={AdminProjects} />
@@ -52,8 +73,9 @@ function Router() {
       <ProtectedRoute path="/admin/services" component={AdminServices} />
       <ProtectedRoute path="/admin/social-links" component={AdminSocialLinks} />
       <ProtectedRoute path="/admin/blog" component={AdminBlog} />
-      <Route component={NotFound} />
-    </Switch>
+      
+      {!CurrentPage && location !== "/blog" && !location.startsWith("/blog/") && location !== "/auth" && !location.startsWith("/admin") && <NotFound />}
+    </>
   );
 }
 
