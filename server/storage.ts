@@ -153,8 +153,9 @@ export class MemStorage implements IStorage {
 
     const socialLinks = [
       { platform: "LinkedIn", url: "https://linkedin.com/in/kartik-sharma06", icon: "Linkedin", handle: "@kartik-sharma06", order: "0" },
-      { platform: "GitHub", url: "https://github.com", icon: "Github", handle: "", order: "1" },
-      { platform: "Email", url: "mailto:contact@example.com", icon: "Mail", handle: "Get in touch", order: "2" },
+      { platform: "GitHub", url: "https://github.com/kartiksharma4448", icon: "Github", handle: "@kartiksharma4448", order: "1" },
+      { platform: "Instagram", url: "https://instagram.com/kartik.verse6", icon: "Instagram", handle: "@kartik.verse6", order: "2" },
+      { platform: "Email", url: "mailto:contact@example.com", icon: "Mail", handle: "Get in touch", order: "3" },
     ];
 
     socialLinks.forEach(link => this.createSocialLinkSync(link));
