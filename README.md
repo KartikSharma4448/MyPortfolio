@@ -1,24 +1,49 @@
-Full-Stack Dynamic Developer Portfolio
+<p align="center"><img src="https://kartiksharma.site/favicon.png" alt="Kartik Sharma Logo" width="100"></p>
 
-This repository contains the complete source code for my personal portfolio website, live at kartiksharma.site.
-This is not just a static site. It is a full-stack monorepo application featuring a React frontend, a Node.js (Hono/Express) backend API, a PostgreSQL database, and a complete, secure Admin Panel for dynamic content management.
+<h1 align="center">Full-Stack Dynamic Portfolio</h1>
 
-🚀 About This Project
-The primary goal of this project was to build a high-performance, fully dynamic portfolio that I could manage without touching the code.
-All content—including projects, blog posts, skills, and certificates—is served from a database. I built a secure Admin Panel with authentication where I can perform full CRUD (Create, Read, Update, Delete) operations on all site content.
+<p align="center">A complete full-stack portfolio website built on React, Node.js (Hono), and PostgreSQL, featuring a custom Admin Panel.</p>
 
-🛠️ Tech Stack
-This project utilizes a monorepo structure with shared type definitions, a React frontend, and a Node.js backend.
-Frontend: React, TypeScript, Vite, Tailwind CSS
-Backend: Node.js, Hono, Express.js
-Database: Remote PostgreSQL
-ORM: Drizzle ORM (for type-safe SQL)
-Authentication: JWT (JSON Web Tokens) for secure API routes
-Deployment: Deployed on Render with a CI/CD pipeline from GitHub.
+<hr>
 
-✨ Features
-Dynamic Content: All data for projects, blogs, skills, certificates, and services is fetched from the database.
-Secure Admin Panel: A complete admin dashboard to manage all site content, protected by JWT authentication.
-Custom REST API: A full backend API built to handle all communication between the client and the database.
-SEO Optimized: Includes dynamic meta tags, structured JSON-LD data, and an auto-generated sitemap.xml for better search engine indexing.
-Automated Deployment: CI/CD pipeline via Render ensures that any push to the main branch is automatically built and deployed.
+<h1>🚀 Live Demo
+You can view the live project at: https://kartiksharma.site</h1>
+
+<h2>✨ Features</h2>
+This is not a simple static site. It includes:
+
+<p>1. Secure Admin Panel: A custom-built admin dashboard to manage content, protected by JWT Authentication.</p>
+<p>2. Dynamic Content: All data (Projects, Blogs, Skills) is served from a PostgreSQL database.</p>
+<p>3. Full CRUD Functionality: The admin panel supports Create, Read, Update, and Delete operations for Projects, Skills, Certificates, and Blog Posts.</p>
+<p>4. Custom REST API: A backend API built with Node.js/Hono handles all client-server communication.</p>
+<p>5. SEO Optimized: Features auto-generated sitemap.xml and structured JSON-LD data for better search engine indexing.</p>
+
+<h3>🛠️ Tech Stack</h3>
+<p>1. Frontend: React, TypeScript, Vite, Tailwind CSS</p>
+<p>2. Backend: Node.js, Hono, Express.js</p>
+<p>3. Database: PostgreSQL</p>
+<p>4. ORM: Drizzle ORM (Type-safe SQL)</p>
+<p>5. Deployment: Render (with CI/CD pipeline)</p>
+
+<h4>🖥️ How to Run Locally</h4>
+Method:- Manual (On your local machine)
+
+<p>Clone the repository:</p>
+git clone https://github.com/KartikSharma4448/MyPortfolio.git
+cd MyPortfolio
+
+<p>Install dependencies:</p>
+npm install
+
+<p>Setup Environment Variables (.env): You will need to create a .env file and provide the database connection string (DATABASE_URL).</p>
+
+<p>Run the development server:</p>
+npm run dev
+
+<h5>[!NOTE]</h5>
+This project is a monorepo, meaning the client (frontend) and server (backend) code reside in the same repository.
+The shared folder is used to share type definitions (schemas) between the frontend and backend for full type-safety.
+
+Homepage - https://kartiksharma.site
+LinkedIn Profile
+<p align="center">Made with ❤️ in Jaipur</p>
