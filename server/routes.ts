@@ -2,7 +2,6 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, ensureAuthenticated } from "./auth";
-import { sendContactEmail } from "./email";
 import {
   insertProjectSchema,
   insertCertificateSchema,
@@ -238,17 +237,9 @@ app.post("/api/contact", async (req, res) => {
     }
     
     try {
-      // 1. Save to database FIRST (This guarantees we have the message)
+      // Save message to database - admin can view it in the admin panel
       const message = await storage.createContactMessage(result.data);
-      
-      // 2. Try to send email (If this fails, we just log it)
-      try {
-        await sendContactEmail(result.data);
-      } catch (emailError) {
-        console.error("Email failed to send, but message was saved:", emailError);
-      }
-
-      // 3. Always return success to the user
+      console.log('Contact message saved successfully:', message.id);
       res.json(message);
     } catch (error) {
       console.error('Error processing contact form:', error);
