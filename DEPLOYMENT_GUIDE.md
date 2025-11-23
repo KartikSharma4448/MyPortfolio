@@ -80,15 +80,7 @@ git push origin main
 2. **NODE_ENV**
    - Value: `production`
 
-#### 🔧 Optional (Email Feature Ke Liye):
-
-Agar contact form se email bhejni hai to yeh bhi add karein:
-
-3. **GMAIL_USER**
-   - Value: Aapka Gmail address
-
-4. **GMAIL_APP_PASSWORD**
-   - Value: Gmail App Password (Settings → Security → App Passwords)
+**Note**: Contact form messages database mein save honge. Admin panel se dekh sakte ho (`/admin` pe login karke).
 
 ### 2.5 Deploy Karein
 
@@ -187,8 +179,8 @@ Saare pages dekhein:
 
 1. Contact page pe jayein
 2. Test message bhejein
-3. Agar email setup kiya hai to email aana chahiye
-4. Message database mein save ho jayega (contact_messages table)
+3. Message database mein save ho jayega (contact_messages table)
+4. Admin panel (`/admin`) mein login karke messages dekh sakte ho
 
 ### 5.4 Logs Check Karein
 
@@ -240,13 +232,13 @@ Dekhne ke liye:
 - Keep-alive system start hone mein 1-2 minutes lagta hai
 - Baad mein fast ho jayega
 
-### Problem: "Contact form emails nahi aa rahe"
+### Problem: "Contact form submit nahi ho raha"
 
 **Solution**:
-1. `GMAIL_USER` aur `GMAIL_APP_PASSWORD` check karein
-2. Gmail App Password generate kiya hai? (normal password nahi chalega)
-3. Spam folder check karein
-4. Render logs mein email errors dekhein
+1. Database connection check karein (DATABASE_URL sahi hai?)
+2. Admin panel mein login karke messages dekh sakte ho
+3. Browser console mein errors check karein
+4. Render logs mein errors dekhein
 
 ### Problem: "Database tables nahi bane"
 
@@ -279,7 +271,7 @@ npm run db:push
 ✅ **Database Persistence**: Neon PostgreSQL
 ✅ **Keep-Alive System**: Automatic 24/7 uptime
 ✅ **Health Endpoint**: `/health` for monitoring
-✅ **Email Integration**: Contact form emails
+✅ **Contact Form**: Messages saved to database
 ✅ **Admin System**: Manage all content
 ✅ **SEO Optimized**: Meta tags, Open Graph
 ✅ **Legal Pages**: Privacy & Terms
@@ -350,7 +342,7 @@ Agar koi problem ho to:
 ✅ **24/7 Active**: Never sleeps (keep-alive enabled)
 ✅ **Fast & Reliable**: Neon serverless database
 ✅ **Fully Featured**: All admin features working
-✅ **Production Ready**: SEO, emails, blog, everything!
+✅ **Production Ready**: SEO, contact form, blog, everything!
 
 ### Your URLs:
 
@@ -371,7 +363,7 @@ Aapki portfolio website ab **production-ready** hai!
 - ✅ 24/7 uptime
 - ✅ Database persistence
 - ✅ Admin panel
-- ✅ Contact form with email
+- ✅ Contact form (messages saved to database)
 - ✅ Blog system
 - ✅ SEO optimized
 - ✅ Mobile responsive

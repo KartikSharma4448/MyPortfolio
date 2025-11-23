@@ -74,7 +74,7 @@ Preferred communication style: Simple, everyday language.
 - **Skills**: name, category (technical/soft/tools/other), proficiency level
 - **Services**: title, description, icon name for display
 - **Social Links**: platform, URL, icon, handle, ordering
-- **Contact Messages**: name, email, message, timestamp (sends email notification via nodemailer)
+- **Contact Messages**: name, email, message, timestamp (saved to database, viewable in admin panel)
 - **Blog Posts**: title, slug, excerpt, content, tags, cover image, published status, dates
 - **About Content**: title, subtitle, description, profile image, stats array
 
@@ -93,14 +93,12 @@ Preferred communication style: Simple, everyday language.
 **Third-Party Services:**
 - **Neon Database**: Serverless PostgreSQL hosting (configured via DATABASE_URL)
 - **Google Analytics**: Website analytics and page tracking
-- **Gmail SMTP**: Email notifications for contact form (via nodemailer with GMAIL_USER and GMAIL_APP_PASSWORD)
 - **Google Fonts**: Inter and JetBrains Mono font families
 
 **Key NPM Packages:**
 - **@tanstack/react-query**: Server state management and caching
 - **drizzle-orm**: TypeScript ORM for PostgreSQL
 - **@neondatabase/serverless**: Neon database client
-- **nodemailer**: Email sending for contact form notifications
 - **zod**: Runtime type validation
 - **react-hook-form**: Form state management
 - **@hookform/resolvers**: Zod integration for form validation
@@ -127,22 +125,27 @@ Preferred communication style: Simple, everyday language.
 **Build & Deployment:**
 - Client builds to `dist/public`
 - Server bundles to `dist/index.js`
-- Environment variables: DATABASE_URL, GMAIL_USER, GMAIL_APP_PASSWORD, NODE_ENV
+- Environment variables: DATABASE_URL, NODE_ENV
 - Production mode uses bundled server with static file serving
 - Ready for deployment to Render.com or similar platforms
 - SEO optimized with Open Graph, Twitter Cards, and Schema.org markup
 
-## Recent Updates (November 18, 2025)
+## Recent Updates
 
-### Features Added:
-1. **Email Integration**: Contact form now sends email notifications using Gmail SMTP
-2. **Admin About Page**: New admin interface at `/admin/about` for managing about page content
-3. **Legal Pages**: Added Privacy Policy (`/privacy-policy`) and Terms of Service (`/terms-of-service`) with full SEO
-4. **Database Persistence**: PostgreSQL configured for permanent data storage (solves Render free tier spin-down issue)
-5. **Blog System**: Full admin interface for creating, editing, and publishing blog posts
+### November 23, 2025:
+- **Removed Email System**: Removed unreliable nodemailer/Gmail SMTP integration
+  - Contact messages now save directly to database only
+  - View messages in admin panel at `/admin` (contact messages section)
+  - No email delays or failures on Render deployment
+
+### November 18, 2025:
+1. **Admin About Page**: New admin interface at `/admin/about` for managing about page content
+2. **Legal Pages**: Added Privacy Policy (`/privacy-policy`) and Terms of Service (`/terms-of-service`) with full SEO
+3. **Database Persistence**: PostgreSQL configured for permanent data storage (solves Render free tier spin-down issue)
+4. **Blog System**: Full admin interface for creating, editing, and publishing blog posts
 
 ### Admin Routes:
-- `/admin` - Dashboard with content overview
+- `/admin` - Dashboard with content overview (includes contact messages)
 - `/admin/about` - Manage about page content
 - `/admin/projects` - Manage projects
 - `/admin/certificates` - Manage certificates
@@ -151,13 +154,7 @@ Preferred communication style: Simple, everyday language.
 - `/admin/social-links` - Manage social media links
 - `/admin/blog` - Create and manage blog posts
 
-### Email Configuration:
-- Uses nodemailer with Gmail SMTP
-- Environment variables: GMAIL_USER, GMAIL_APP_PASSWORD
-- Sends formatted emails with sender info and reply-to address
-
 ### Deployment Notes:
 - See DEPLOYMENT_GUIDE.md for complete Render deployment instructions
 - Database URL must be configured in production
-- Gmail credentials required for contact form emails
 - Free tier on Render: app spins down after 15 min inactivity (use UptimeRobot to prevent)
