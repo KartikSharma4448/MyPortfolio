@@ -11,3 +11,4 @@
 [x] 11. Update footer with legal page links
 [x] 12. Create deployment guide for Render
 [x] 13. All issues resolved - project is production-ready!
+[x] 14. Remove unreliable email system (nodemailer) - messages now save to database only
