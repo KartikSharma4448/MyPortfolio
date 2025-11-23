@@ -172,6 +172,7 @@ export const insertAboutContentSchema = createInsertSchema(aboutContent).omit({
   id: true,
   updatedAt: true,
 }).extend({
+  profileImage: z.string().nullable().optional(),
   stats: z.array(z.string()).default([]),
 });
 
