@@ -10,16 +10,16 @@ export async function sendTelegramNotification(message: InsertContactMessage): P
   }
 
   const text = `
-🔔 *New Contact Form Message*
+🔔 New Contact Form Message
 
-👤 *Name:* ${message.name}
-📧 *Email:* ${message.email}
+👤 Name: ${message.name}
+📧 Email: ${message.email}
 
-💬 *Message:*
+💬 Message:
 ${message.message}
 
 ---
-_Reply directly to: ${message.email}_
+Reply directly to: ${message.email}
   `.trim();
 
   try {
@@ -33,7 +33,7 @@ _Reply directly to: ${message.email}_
         body: JSON.stringify({
           chat_id: chatId,
           text: text,
-          parse_mode: 'Markdown',
+          // No parse_mode - plain text is more reliable with user input
         }),
       }
     );

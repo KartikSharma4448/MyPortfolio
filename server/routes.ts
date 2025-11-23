@@ -242,10 +242,18 @@ app.post("/api/contact", async (req, res) => {
       const message = await storage.createContactMessage(result.data);
       console.log('✅ Contact message saved to database:', message.id);
       
-      // 2. Send instant Telegram notification (non-blocking)
-      sendTelegramNotification(result.data).catch(error => {
-        console.error('Telegram notification failed (message still saved):', error);
-      });
+      // 2. Send instant Telegram notification (non-blocking, but tracked)
+      sendTelegramNotification(result.data)
+        .then(success => {
+          if (success) {
+            console.log('✅ Telegram notification sent');
+          } else {
+            console.warn('⚠️ Telegram notification failed (check credentials)');
+          }
+        })
+        .catch(error => {
+          console.error('❌ Telegram notification error:', error);
+        });
       
       res.json(message);
     } catch (error) {
