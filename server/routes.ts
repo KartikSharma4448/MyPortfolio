@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, ensureAuthenticated } from "./auth";
+import { sendTelegramNotification } from "./telegram";
 import {
   insertProjectSchema,
   insertCertificateSchema,
@@ -237,9 +238,15 @@ app.post("/api/contact", async (req, res) => {
     }
     
     try {
-      // Save message to database - admin can view it in the admin panel
+      // 1. Save message to database (primary storage)
       const message = await storage.createContactMessage(result.data);
-      console.log('Contact message saved successfully:', message.id);
+      console.log('✅ Contact message saved to database:', message.id);
+      
+      // 2. Send instant Telegram notification (non-blocking)
+      sendTelegramNotification(result.data).catch(error => {
+        console.error('Telegram notification failed (message still saved):', error);
+      });
+      
       res.json(message);
     } catch (error) {
       console.error('Error processing contact form:', error);
