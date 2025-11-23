@@ -80,7 +80,19 @@ git push origin main
 2. **NODE_ENV**
    - Value: `production`
 
-**Note**: Contact form messages database mein save honge. Admin panel se dekh sakte ho (`/admin` pe login karke).
+#### 🔔 Optional (Instant Telegram Notifications):
+
+Agar contact form par instant notification chahiye (recommended!):
+
+3. **TELEGRAM_BOT_TOKEN**
+   - Value: Aapka Telegram bot token
+   - Setup guide: `TELEGRAM_SETUP.md` dekhein
+
+4. **TELEGRAM_CHAT_ID**
+   - Value: Aapki Telegram chat ID
+   - Setup guide: `TELEGRAM_SETUP.md` dekhein
+
+**Note**: Contact form messages database mein save honge. Admin panel se dekh sakte ho (`/admin` pe login karke). Telegram notifications optional hain.
 
 ### 2.5 Deploy Karein
 

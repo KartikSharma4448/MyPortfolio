@@ -137,6 +137,11 @@ Preferred communication style: Simple, everyday language.
   - Contact messages now save directly to database only
   - View messages in admin panel at `/admin` (contact messages section)
   - No email delays or failures on Render deployment
+- **Added Telegram Notifications**: Instant notifications when contact form is submitted
+  - Fast and reliable (1-2 seconds notification)
+  - Free forever, no limits
+  - Works perfectly on cloud platforms
+  - See TELEGRAM_SETUP.md for complete setup guide
 
 ### November 18, 2025:
 1. **Admin About Page**: New admin interface at `/admin/about` for managing about page content
