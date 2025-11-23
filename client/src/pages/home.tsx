@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, ExternalLink, FolderOpen, Award, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import type { Project, Certificate } from "@shared/schema";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,12 +15,15 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
-  const stats = [
-    { label: "Years of Study", value: "2+" },
-    { label: "Certifications", value: "16+" },
-    { label: "Projects", value: "5+" },
-    { label: "CGPA", value: "9.43" },
-  ];
+  const { data: projects = [] } = useQuery<Project[]>({
+    queryKey: ["/api/projects"],
+  });
+
+  const { data: certificates = [] } = useQuery<Certificate[]>({
+    queryKey: ["/api/certificates"],
+  });
+
+  const featuredProjects = projects.filter((p) => p.featured === "true").slice(0, 2);
 
   const skills = [
     "Software Development",
@@ -29,6 +34,13 @@ export default function Home() {
     "Cloud Computing",
     "AI Prompting",
     "Microsoft Office",
+  ];
+
+  const stats = [
+    { label: "Years of Study", value: "2+" },
+    { label: "Certifications", value: `${certificates.length}+` },
+    { label: "Projects", value: `${projects.length}+` },
+    { label: "CGPA", value: "9.43" },
   ];
 
   const containerVariants = {
@@ -281,6 +293,124 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Featured Projects Section */}
+      {featuredProjects.length > 0 && (
+        <section className="py-20 bg-card/50">
+          <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Featured Projects
+              </h2>
+              <p className="text-muted-foreground">
+                Showcase of my best work and recent accomplishments
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+            >
+              {featuredProjects.map((project) => (
+                <motion.div key={project.id} variants={itemVariants}>
+                  <Card
+                    className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-xl overflow-hidden group h-full"
+                    data-testid={`featured-project-${project.id}`}
+                  >
+                    {project.imageUrl && (
+                      <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-chart-2/20 flex items-center justify-center relative overflow-hidden">
+                        <FolderOpen className="h-16 w-16 text-muted-foreground/30 group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <div className="flex items-start justify-between gap-4">
+                        <CardTitle className="text-2xl">
+                          {project.title}
+                        </CardTitle>
+                        <Badge className="bg-chart-2 hover:bg-chart-2">
+                          Featured
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, idx) => (
+                          <Badge key={idx} variant="secondary" className="transition-transform hover:scale-105">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      <div className="flex gap-3 pt-2">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-testid={`link-live-project-${project.id}`}
+                          >
+                            <Button size="sm" className="group/btn relative overflow-hidden">
+                              <span className="relative z-10 flex items-center">
+                                <ExternalLink className="h-4 w-4 mr-2" />
+                                Live Demo
+                              </span>
+                              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-chart-2/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
+                            </Button>
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-testid={`link-github-project-${project.id}`}
+                          >
+                            <Button size="sm" variant="outline" className="group/btn relative overflow-hidden">
+                              <span className="relative z-10 flex items-center">
+                                <Github className="h-4 w-4 mr-2" />
+                                GitHub
+                              </span>
+                              <div className="absolute inset-0 bg-primary/5 scale-0 group-hover/btn:scale-100 transition-transform duration-300" />
+                            </Button>
+                          </a>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center mt-12"
+            >
+              <Link href="/projects">
+                <Button variant="outline" className="group relative overflow-hidden" data-testid="button-view-all-projects">
+                  <span className="relative z-10">View All Projects</span>
+                  <div className="absolute inset-0 bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-chart-2/10">
