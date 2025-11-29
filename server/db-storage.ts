@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import { db } from './db';
 import {
   projects,
@@ -10,6 +10,11 @@ import {
   users,
   blogPosts,
   aboutContent,
+  education,
+  experience,
+  professionalSummary,
+  blogLikes,
+  blogComments,
   type Project,
   type InsertProject,
   type Certificate,
@@ -28,6 +33,16 @@ import {
   type InsertBlogPost,
   type AboutContent,
   type InsertAboutContent,
+  type Education,
+  type InsertEducation,
+  type Experience,
+  type InsertExperience,
+  type ProfessionalSummary,
+  type InsertProfessionalSummary,
+  type BlogLike,
+  type InsertBlogLike,
+  type BlogComment,
+  type InsertBlogComment,
 } from '@shared/schema';
 import session from 'express-session';
 import createMemoryStore from 'memorystore';
@@ -393,5 +408,219 @@ export class DbStorage implements IStorage {
         .returning();
       return result[0];
     }
+  }
+
+  // Education
+  async getEducation(): Promise<Education[]> {
+    const result = await db
+      .select()
+      .from(education)
+      .orderBy(education.order);
+    return result;
+  }
+
+  async getEducationItem(id: string): Promise<Education | undefined> {
+    const result = await db
+      .select()
+      .from(education)
+      .where(eq(education.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async createEducation(insertEducation: InsertEducation): Promise<Education> {
+    const result = await db
+      .insert(education)
+      .values(insertEducation)
+      .returning();
+    return result[0];
+  }
+
+  async updateEducation(id: string, insertEducation: InsertEducation): Promise<Education | undefined> {
+    const result = await db
+      .update(education)
+      .set(insertEducation)
+      .where(eq(education.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteEducation(id: string): Promise<boolean> {
+    const result = await db
+      .delete(education)
+      .where(eq(education.id, id))
+      .returning();
+    return result.length > 0;
+  }
+
+  // Experience
+  async getExperience(): Promise<Experience[]> {
+    const result = await db
+      .select()
+      .from(experience)
+      .orderBy(experience.order);
+    return result;
+  }
+
+  async getExperienceItem(id: string): Promise<Experience | undefined> {
+    const result = await db
+      .select()
+      .from(experience)
+      .where(eq(experience.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async createExperience(insertExperience: InsertExperience): Promise<Experience> {
+    const result = await db
+      .insert(experience)
+      .values(insertExperience)
+      .returning();
+    return result[0];
+  }
+
+  async updateExperience(id: string, insertExperience: InsertExperience): Promise<Experience | undefined> {
+    const result = await db
+      .update(experience)
+      .set(insertExperience)
+      .where(eq(experience.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteExperience(id: string): Promise<boolean> {
+    const result = await db
+      .delete(experience)
+      .where(eq(experience.id, id))
+      .returning();
+    return result.length > 0;
+  }
+
+  // Professional Summary
+  async getProfessionalSummary(): Promise<ProfessionalSummary[]> {
+    const result = await db
+      .select()
+      .from(professionalSummary)
+      .orderBy(professionalSummary.order);
+    return result;
+  }
+
+  async getProfessionalSummaryItem(id: string): Promise<ProfessionalSummary | undefined> {
+    const result = await db
+      .select()
+      .from(professionalSummary)
+      .where(eq(professionalSummary.id, id))
+      .limit(1);
+    return result[0];
+  }
+
+  async createProfessionalSummary(insertSummary: InsertProfessionalSummary): Promise<ProfessionalSummary> {
+    const result = await db
+      .insert(professionalSummary)
+      .values(insertSummary)
+      .returning();
+    return result[0];
+  }
+
+  async updateProfessionalSummary(id: string, insertSummary: InsertProfessionalSummary): Promise<ProfessionalSummary | undefined> {
+    const result = await db
+      .update(professionalSummary)
+      .set(insertSummary)
+      .where(eq(professionalSummary.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteProfessionalSummary(id: string): Promise<boolean> {
+    const result = await db
+      .delete(professionalSummary)
+      .where(eq(professionalSummary.id, id))
+      .returning();
+    return result.length > 0;
+  }
+
+  // Blog Likes
+  async getBlogLikes(postId: string): Promise<BlogLike[]> {
+    const result = await db
+      .select()
+      .from(blogLikes)
+      .where(eq(blogLikes.postId, postId));
+    return result;
+  }
+
+  async getBlogLikeCount(postId: string): Promise<number> {
+    const result = await db
+      .select()
+      .from(blogLikes)
+      .where(eq(blogLikes.postId, postId));
+    return result.length;
+  }
+
+  async hasUserLiked(postId: string, visitorId: string): Promise<boolean> {
+    const result = await db
+      .select()
+      .from(blogLikes)
+      .where(and(eq(blogLikes.postId, postId), eq(blogLikes.visitorId, visitorId)))
+      .limit(1);
+    return result.length > 0;
+  }
+
+  async addBlogLike(insertLike: InsertBlogLike): Promise<BlogLike> {
+    const result = await db
+      .insert(blogLikes)
+      .values(insertLike)
+      .returning();
+    return result[0];
+  }
+
+  async removeBlogLike(postId: string, visitorId: string): Promise<boolean> {
+    const result = await db
+      .delete(blogLikes)
+      .where(and(eq(blogLikes.postId, postId), eq(blogLikes.visitorId, visitorId)))
+      .returning();
+    return result.length > 0;
+  }
+
+  // Blog Comments
+  async getBlogComments(postId: string, approvedOnly: boolean = false): Promise<BlogComment[]> {
+    if (approvedOnly) {
+      const result = await db
+        .select()
+        .from(blogComments)
+        .where(and(eq(blogComments.postId, postId), eq(blogComments.approved, 'true')))
+        .orderBy(blogComments.createdAt);
+      return result;
+    }
+    const result = await db
+      .select()
+      .from(blogComments)
+      .where(eq(blogComments.postId, postId))
+      .orderBy(blogComments.createdAt);
+    return result;
+  }
+
+  async createBlogComment(insertComment: InsertBlogComment): Promise<BlogComment> {
+    const result = await db
+      .insert(blogComments)
+      .values(insertComment)
+      .returning();
+    return result[0];
+  }
+
+  async approveBlogComment(id: string): Promise<BlogComment | undefined> {
+    const result = await db
+      .update(blogComments)
+      .set({ approved: 'true' })
+      .where(eq(blogComments.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteBlogComment(id: string): Promise<boolean> {
+    const result = await db
+      .delete(blogComments)
+      .where(eq(blogComments.id, id))
+      .returning();
+    return result.length > 0;
   }
 }
