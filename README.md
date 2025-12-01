@@ -14,7 +14,7 @@ A robust full-stack portfolio application built to showcase software development
 
 | Client View (Home) |
 |:---:|
-| ![Home UI](https://via.placeholder.com/600x300?text=Upload+Your+Home+Screenshot) | 
+| ![Home UI](https://github.com/KartikSharma4448/MyPortfolio/blob/main/client/public/Screenshot%202025-12-01%20212911.png) | 
 
 > *Note: Replace the placeholders above with actual screenshots of your application.*
 
