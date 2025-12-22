@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AnimatedBackground } from "@/components/3d-background";
 import type { Project, Certificate } from "@shared/schema";
 
 export default function Home() {
@@ -69,9 +70,11 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-chart-2/5 -z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))] -z-10" />
+        {/* 3D Animated Background */}
+        <AnimatedBackground />
+        
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent -z-10" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
