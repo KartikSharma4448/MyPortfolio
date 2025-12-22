@@ -8,11 +8,13 @@ import {
   Brain,
   Loader2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Certificate, Skill } from "@shared/schema";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 export default function Achievements() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -58,7 +60,7 @@ export default function Achievements() {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div {...fadeInUp} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Achievements & Skills
           </h1>
@@ -66,7 +68,7 @@ export default function Achievements() {
             Showcasing my certifications, skills, and continuous learning
             journey
           </p>
-        </div>
+        </motion.div>
 
         <Tabs defaultValue="certificates" className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
@@ -82,43 +84,69 @@ export default function Achievements() {
 
           <TabsContent value="certificates">
             {/* Certificate Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <Award className="h-8 w-8 mx-auto mb-3 text-primary" />
-                  <div className="text-3xl font-bold text-primary mb-1">
-                    {certificates?.length || 0}+
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Certifications
-                  </div>
-                </CardContent>
-              </Card>
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              <motion.div variants={staggerItem}>
+                <Card className="hover-elevate transition-all duration-300 h-full">
+                  <CardContent className="p-6 text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Award className="h-8 w-8 mx-auto mb-3 text-primary" />
+                    </motion.div>
+                    <div className="text-3xl font-bold text-primary mb-1">
+                      {certificates?.length || 0}+
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Total Certifications
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <BookOpen className="h-8 w-8 mx-auto mb-3 text-chart-2" />
-                  <div className="text-3xl font-bold text-chart-2 mb-1">
-                    {new Set(certificates?.map((c) => c.issuer)).size || 0}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Platforms
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div variants={staggerItem}>
+                <Card className="hover-elevate transition-all duration-300 h-full">
+                  <CardContent className="p-6 text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <BookOpen className="h-8 w-8 mx-auto mb-3 text-chart-2" />
+                    </motion.div>
+                    <div className="text-3xl font-bold text-chart-2 mb-1">
+                      {new Set(certificates?.map((c) => c.issuer)).size || 0}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Platforms
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <Brain className="h-8 w-8 mx-auto mb-3 text-chart-3" />
-                  <div className="text-3xl font-bold text-chart-3 mb-1">
-                    {skills?.length || 0}+
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Skills Mastered
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+              <motion.div variants={staggerItem}>
+                <Card className="hover-elevate transition-all duration-300 h-full">
+                  <CardContent className="p-6 text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Brain className="h-8 w-8 mx-auto mb-3 text-chart-3" />
+                    </motion.div>
+                    <div className="text-3xl font-bold text-chart-3 mb-1">
+                      {skills?.length || 0}+
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Skills Mastered
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
 
             {/* Filter Tabs */}
             <div className="flex flex-wrap gap-2 mb-8 justify-center">

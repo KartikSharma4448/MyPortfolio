@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { useAuth } from "@/hooks/use-auth";
+import { fadeInDown, staggerContainer, staggerItem } from "@/lib/animations";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -37,7 +39,8 @@ export function Navbar() {
   };
 
   return (
-    <header
+    <motion.header
+      {...fadeInDown}
       className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md shadow-sm"
@@ -46,74 +49,31 @@ export function Navbar() {
     >
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link
-            href="/"
-            data-testid="link-home"
-            className="text-xl font-bold tracking-tight hover-elevate active-elevate-2 px-2 py-1 rounded-md"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
-            Kartik<span className="text-primary">.</span>
-          </Link>
+            <Link
+              href="/"
+              data-testid="link-home"
+              className="text-xl font-bold tracking-tight hover-elevate active-elevate-2 px-2 py-1 rounded-md"
+            >
+              Kartik<span className="text-primary">.</span>
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <motion.div 
+            className="hidden md:flex items-center gap-1"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                data-testid={`link-nav-${link.label.toLowerCase().replace(" ", "-")}`}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 ${
-                  isActive(link.href)
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            {user && (
-              <Link href="/admin">
-                <Button
-                  variant="default"
-                  size="sm"
-                  data-testid="button-admin"
-                  className="hidden md:inline-flex"
-                >
-                  Admin
-                </Button>
-              </Link>
-            )}
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden hover-elevate active-elevate-2"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
+              <motion.div key={link.href} variants={staggerItem}>
                 <Link
-                  key={link.href}
                   href={link.href}
-                  data-testid={`link-mobile-${link.label.toLowerCase().replace(" ", "-")}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid={`link-nav-${link.label.toLowerCase().replace(" ", "-")}`}
                   className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 block ${
                     isActive(link.href)
                       ? "bg-accent text-accent-foreground"
@@ -122,24 +82,118 @@ export function Navbar() {
                 >
                   {link.label}
                 </Link>
-              ))}
-              {user && (
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="flex items-center gap-2">
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <ThemeToggle />
+            </motion.div>
+            {user && (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link href="/admin">
                   <Button
                     variant="default"
                     size="sm"
-                    className="w-full mt-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid="button-mobile-admin"
+                    data-testid="button-admin"
+                    className="hidden md:inline-flex"
                   >
-                    Admin Panel
+                    Admin
                   </Button>
                 </Link>
-              )}
-            </div>
+              </motion.div>
+            )}
+
+            {/* Mobile Menu Button */}
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden hover-elevate active-elevate-2"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                data-testid="button-mobile-menu"
+              >
+                <AnimatePresence mode="wait">
+                  {isMobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="h-5 w-5" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="open"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="h-5 w-5" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Button>
+            </motion.div>
           </div>
-        )}
+        </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden py-4 border-t"
+            >
+              <motion.div 
+                className="flex flex-col gap-2"
+                variants={staggerContainer}
+                initial="initial"
+                animate="animate"
+              >
+                {navLinks.map((link) => (
+                  <motion.div key={link.href} variants={staggerItem}>
+                    <Link
+                      href={link.href}
+                      data-testid={`link-mobile-${link.label.toLowerCase().replace(" ", "-")}`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 block ${
+                        isActive(link.href)
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+                {user && (
+                  <motion.div variants={staggerItem}>
+                    <Link href="/admin">
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="w-full mt-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        data-testid="button-mobile-admin"
+                      >
+                        Admin Panel
+                      </Button>
+                    </Link>
+                  </motion.div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
-    </header>
+    </motion.header>
   );
 }
