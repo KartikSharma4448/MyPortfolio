@@ -86,7 +86,13 @@ Configured for Replit deployment:
 - Optimized Vite build with code splitting
 - Set up proper DNS prefetching for Google Fonts
 
-## Known Issues to Address
-- Favicon (360KB) should be compressed to ~32x32 or 64x64 PNG
-- Google Analytics key should be added for proper tracking
-- Consider adding image optimization for profile pictures
+## Recent Updates
+- Dec 22, 2025: Updated favicon with professional headshot photo
+- Favicon now displays in browser tabs and Google search results
+- Performance optimizations applied and database migrated to Neon
+
+## Optimization Recommendations
+- Consider further favicon optimization (current: 768KB) - can be compressed to ~50KB using TinyPNG
+- Add Google Analytics measurement ID for tracking
+- Implement lazy loading for images on projects page
+- Add service worker for offline support (PWA)
