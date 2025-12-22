@@ -1,0 +1,37 @@
+2025-12-22T11:49:26.455021929Z 11:49:26 AM [express] Running database migrations...
+2025-12-22T11:49:27.045382291Z 11:49:26 AM [express] Database tables already exist
+2025-12-22T11:49:27.045552775Z 11:49:27 AM [express] ✅ Migrations completed
+2025-12-22T11:49:27.14614942Z 11:49:27 AM [express] serving on port 10000
+2025-12-22T11:49:27.146400055Z 11:49:27 AM [express] Keep-alive service started. Will ping https://portfolio-test-9k32.onrender.com/health every 13 minutes
+2025-12-22T11:49:28.869717171Z 11:49:28 AM [express] GET /api/projects 200 in 19ms :: [{"id":"053dffc0-e23b-4da6-aa94-361f18003f13",…
+2025-12-22T11:49:28.878311018Z 11:49:28 AM [express] GET /api/user 401 in 1ms
+2025-12-22T11:49:30.8104458Z file:///opt/render/project/src/node_modules/@neondatabase/serverless/index.mjs:1556
+2025-12-22T11:49:30.810489471Z let{status:W}=te;if(W===400){let H=await te.json(),Ae=new pe(H.message);for(let xe of Wc)
+2025-12-22T11:49:30.810501061Z                                                       ^
+2025-12-22T11:49:30.810504891Z 
+2025-12-22T11:49:30.810509571Z NeonDbError: column "title" does not exist
+2025-12-22T11:49:30.810514121Z     at execute (file:///opt/render/project/src/node_modules/@neondatabase/serverless/index.mjs:1556:55)
+2025-12-22T11:49:30.810518242Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-12-22T11:49:30.810522922Z     at async NeonHttpPreparedQuery.execute (file:///opt/render/project/src/node_modules/drizzle-orm/neon-http/session.js:40:20)
+2025-12-22T11:49:30.810527072Z     at async DbStorage.getCertificates (file:///opt/render/project/src/dist/index.js:219:20)
+2025-12-22T11:49:30.810531982Z     at async file:///opt/render/project/src/dist/index.js:921:27 {
+2025-12-22T11:49:30.810536482Z   severity: 'ERROR',
+2025-12-22T11:49:30.810540282Z   code: '42703',
+2025-12-22T11:49:30.810544222Z   detail: undefined,
+2025-12-22T11:49:30.810548142Z   hint: undefined,
+2025-12-22T11:49:30.810551982Z   position: '14',
+2025-12-22T11:49:30.810556342Z   internalPosition: undefined,
+2025-12-22T11:49:30.810560342Z   internalQuery: undefined,
+2025-12-22T11:49:30.810564312Z   where: undefined,
+2025-12-22T11:49:30.810568632Z   schema: undefined,
+2025-12-22T11:49:30.810572613Z   table: undefined,
+2025-12-22T11:49:30.810576533Z   column: undefined,
+2025-12-22T11:49:30.810580433Z   dataType: undefined,
+2025-12-22T11:49:30.810584493Z   constraint: undefined,
+2025-12-22T11:49:30.810588483Z   file: 'parse_relation.c',
+2025-12-22T11:49:30.810592483Z   line: '3716',
+2025-12-22T11:49:30.810596553Z   routine: 'errorMissingColumn',
+2025-12-22T11:49:30.810600423Z   sourceError: undefined
+2025-12-22T11:49:30.810604373Z }
+2025-12-22T11:49:30.810608203Z 
+2025-12-22T11:49:30.810612213Z Node.js v22.16.0
