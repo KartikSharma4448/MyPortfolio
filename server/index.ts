@@ -18,6 +18,21 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: false }));
 
+// Performance optimization: Cache headers for static assets
+app.use((req, res, next) => {
+  // Cache static assets for 1 year
+  if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/i)) {
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (req.path.endsWith('.html')) {
+    // Don't cache HTML files - always check
+    res.set('Cache-Control', 'public, max-age=0, must-revalidate');
+  } else {
+    // Default: short cache for API responses
+    res.set('Cache-Control', 'public, max-age=60');
+  }
+  next();
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
