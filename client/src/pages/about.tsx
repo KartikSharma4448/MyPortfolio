@@ -1,6 +1,8 @@
 import { GraduationCap, Briefcase, MapPin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 export default function About() {
   const education = [
@@ -54,17 +56,18 @@ export default function About() {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div {...fadeInUp} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">About Me</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             I am currently pursuing my Bachelor of Computer Applications (BCA),
             where I am building a strong foundation in programming, computer
             science concepts, and modern technologies.
           </p>
-        </div>
+        </motion.div>
 
         {/* Professional Summary */}
-        <Card className="mb-12">
+        <motion.div {...fadeInUp} transition={{ delay: 0.2 }}>
+          <Card className="mb-12">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Mail className="h-5 w-5 text-primary" />
@@ -91,16 +94,25 @@ export default function About() {
             </p>
           </CardContent>
         </Card>
+        </motion.div>
 
         {/* Education */}
         <section className="mb-12">
-          <div className="flex items-center gap-2 mb-6">
-            <GraduationCap className="h-6 w-6 text-primary" />
+          <motion.div {...fadeInUp} transition={{ delay: 0.3 }} className="flex items-center gap-2 mb-6">
+            <motion.div whileHover={{ scale: 1.2, rotate: 10 }} transition={{ type: "spring" }}>
+              <GraduationCap className="h-6 w-6 text-primary" />
+            </motion.div>
             <h2 className="text-3xl font-bold">Education</h2>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {education.map((edu, index) => (
+              <motion.div key={index} variants={staggerItem}>
               <Card
                 key={index}
                 className="hover-elevate transition-transform hover:-translate-y-1"
@@ -127,19 +139,28 @@ export default function About() {
                   </div>
                 </CardContent>
               </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* Experience */}
         <section>
-          <div className="flex items-center gap-2 mb-6">
-            <Briefcase className="h-6 w-6 text-primary" />
+          <motion.div {...fadeInUp} transition={{ delay: 0.4 }} className="flex items-center gap-2 mb-6">
+            <motion.div whileHover={{ scale: 1.2, rotate: 10 }} transition={{ type: "spring" }}>
+              <Briefcase className="h-6 w-6 text-primary" />
+            </motion.div>
             <h2 className="text-3xl font-bold">Experience</h2>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {experience.map((exp, index) => (
+              <motion.div key={index} variants={staggerItem}>
               <Card
                 key={index}
                 className="hover-elevate transition-transform hover:-translate-y-1"
@@ -166,12 +187,14 @@ export default function About() {
                   </p>
                 </CardContent>
               </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* Location */}
-        <Card className="mt-12 bg-gradient-to-br from-primary/5 to-chart-2/5">
+        <motion.div {...fadeInUp} transition={{ delay: 0.5 }} className="mt-12">
+        <Card className="bg-gradient-to-br from-primary/5 to-chart-2/5 hover-elevate transition-all">
           <CardContent className="p-8 text-center">
             <MapPin className="h-8 w-8 mx-auto mb-4 text-primary" />
             <h3 className="text-2xl font-bold mb-2">Based in Jaipur</h3>
@@ -180,6 +203,7 @@ export default function About() {
             </p>
           </CardContent>
         </Card>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Calendar, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import type { BlogPost } from "@shared/schema";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 export default function Blog() {
   const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
@@ -18,21 +20,27 @@ export default function Blog() {
   return (
     <div className="min-h-screen py-20 bg-gradient-to-br from-primary/5 via-background to-chart-2/5">
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-        <div className="text-center mb-12">
+        <motion.div {...fadeInUp} className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Thoughts, tutorials, and insights about software development, technology, and learning
           </p>
-        </div>
+        </motion.div>
 
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         ) : blogPosts && blogPosts.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div 
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {blogPosts.map((post) => (
-              <Link key={post.id} href={`/blog/${post.slug}`}>
+              <motion.div key={post.id} variants={staggerItem}>
+              <Link href={`/blog/${post.slug}`}>
                 <Card className="h-full hover-elevate active-elevate-2 transition-all hover:-translate-y-1 cursor-pointer">
                   {post.coverImage && (
                     <div className="aspect-video w-full overflow-hidden rounded-t-lg">
@@ -79,14 +87,15 @@ export default function Blog() {
                   </CardContent>
                 </Card>
               </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : (
-          <div className="text-center py-20">
+          <motion.div {...fadeInUp} className="text-center py-20">
             <p className="text-muted-foreground text-lg">
               No blog posts yet. Check back soon!
             </p>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

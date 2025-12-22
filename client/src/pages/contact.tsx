@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Linkedin, Send, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -82,27 +84,31 @@ export default function Contact() {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div {...fadeInUp} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Have a project in mind or want to collaborate? I'd love to hear from
             you!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <div>
+          <motion.div 
+            className="lg:col-span-2 space-y-6"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
+            <motion.div variants={staggerItem}>
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  return (
-                    <Card
-                      key={index}
-                      className="hover-elevate transition-transform hover:-translate-y-1"
-                    >
+            </motion.div>
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <motion.div key={index} variants={staggerItem}>
+                    <Card className="hover-elevate transition-transform hover:-translate-y-1">
                       <CardContent className="p-4 flex items-start gap-4">
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                           <Icon className="h-5 w-5 text-primary" />
@@ -127,25 +133,28 @@ export default function Contact() {
                         </div>
                       </CardContent>
                     </Card>
-                  );
-                })}
+                  </motion.div>
+                );
+              })}
               </div>
             </div>
 
-            <Card className="bg-gradient-to-br from-primary/10 to-chart-2/10">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Open to Opportunities</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  I'm currently seeking internship opportunities and freelance
-                  projects. Feel free to reach out if you have an interesting
-                  project or opportunity!
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+            <motion.div variants={staggerItem}>
+              <Card className="bg-gradient-to-br from-primary/10 to-chart-2/10">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Open to Opportunities</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    I'm currently seeking internship opportunities and freelance
+                    projects. Feel free to reach out if you have an interesting
+                    project or opportunity!
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-3">
+          <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="lg:col-span-3">
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl">Send a Message</CardTitle>

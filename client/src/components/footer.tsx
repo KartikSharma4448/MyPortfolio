@@ -1,5 +1,7 @@
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { Linkedin, Github, Mail, MapPin } from "lucide-react";
+import { staggerContainer, staggerItem } from "@/lib/animations";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,7 +9,12 @@ export function Footer() {
   return (
     <footer className="w-full border-t bg-card">
       <div className="container mx-auto px-4 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
           <div>
             <h3 className="text-lg font-bold mb-4">
               Kartik<span className="text-primary">.</span>
