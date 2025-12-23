@@ -348,22 +348,4 @@
     background-size: 200% 200%;
     animation: gradient 3s ease infinite;
   }
-
-  /* Hide Replit banner */
-  [data-testid="replit-dev-banner"],
-  .replit-dev-banner,
-  .replit-banner,
-  iframe[src*="replit"],
-  [class*="replit-banner"],
-  [id*="replit-banner"] {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  /* Alternative selectors for Replit watermark/footer */
-  [class*="watermark"],
-  [class*="created-by"],
-  [data-testid*="banner"] {
-    display: none !important;
-  }
 }
