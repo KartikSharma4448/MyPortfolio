@@ -3,6 +3,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { startKeepAlive } from "./keep-alive";
 import { runMigrations } from "./migrate";
+import { validateEnv } from "./config/env";
 
 const app = express();
 
@@ -64,6 +65,9 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Validate environment variables
+  validateEnv();
+
   // Run database migrations first (production only)
   if (app.get("env") === "production") {
     await runMigrations();
