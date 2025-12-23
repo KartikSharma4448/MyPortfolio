@@ -26,6 +26,17 @@ export const env = {
   // Analytics
   GA_MEASUREMENT_ID: getEnvVar('VITE_GA_MEASUREMENT_ID', ''),
 
+  // Email Configuration
+  GMAIL_USER: getEnvVar('GMAIL_USER', ''),
+  GMAIL_APP_PASSWORD: getEnvVar('GMAIL_APP_PASSWORD', ''),
+
+  // Telegram Bot
+  TELEGRAM_BOT_TOKEN: getEnvVar('TELEGRAM_BOT_TOKEN', ''),
+  TELEGRAM_CHAT_ID: getEnvVar('TELEGRAM_CHAT_ID', ''),
+
+  // Admin Registration
+  ADMIN_REGISTRATION_SECRET: getEnvVar('ADMIN_REGISTRATION_SECRET', ''),
+
   // API Keys
   OPENAI_API_KEY: getEnvVar('OPENAI_API_KEY', ''),
   STRIPE_SECRET_KEY: getEnvVar('STRIPE_SECRET_KEY', ''),
