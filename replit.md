@@ -114,14 +114,15 @@ Configured for Replit deployment:
 
 ### Cursor Tracker Animation System:
 - **Global Cursor Tracking**: Mouse position tracked across entire application
-- **Single Smooth Object**: 60px circular element follows cursor smoothly
-- **Glowing Halo**: Radial gradient glow effect around cursor (0.6s duration)
-- **Backdrop Blur**: Frosted glass effect on tracker object (10px blur)
+- **Small & Subtle Object**: 30px circular element (40% opacity) follows cursor smoothly
+- **Barely Visible Design**: Low opacity (0.4) for understated, elegant effect
+- **Subtle Glowing Halo**: Minimal radial gradient glow (15% opacity) around cursor
+- **Backdrop Blur**: Frosted glass effect on tracker object (8px blur)
 - **Smart Visibility**: Objects appear/disappear on mouse enter/leave events
 - **Desktop Optimized**: Hidden on mobile devices (lg breakpoint)
-- **Smooth Motion**: 0.5s transitions with easeOut timing for slow, natural feel
+- **Smooth Motion**: 0.5s transitions with easeOut timing for natural feel
 - **Integrated Globally**: Added to App root for all pages
-- **Clean Design**: Single object with glow instead of multiple layered objects
+- **Elegant Design**: Minimal, understated effect that doesn't distract from content
 
 ### Complete Animation Coverage:
 - ✅ Home - 3D background + floating shapes + cursor tracker

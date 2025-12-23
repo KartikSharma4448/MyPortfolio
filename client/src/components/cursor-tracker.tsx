@@ -26,54 +26,56 @@ export function CursorTracker() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-20 hidden lg:block">
-      {/* Single smooth cursor follower */}
+      {/* Single smooth cursor follower - small and subtle */}
       <motion.div
         animate={{
-          x: mousePosition.x - 30,
-          y: mousePosition.y - 30,
-          opacity: isVisible ? 1 : 0,
+          x: mousePosition.x - 15,
+          y: mousePosition.y - 15,
+          opacity: isVisible ? 0.4 : 0,
         }}
         transition={{
           duration: 0.5,
           ease: 'easeOut',
         }}
-        className="absolute w-16 h-16 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
-          width: '60px',
-          height: '60px',
-          backdropFilter: 'blur(10px)',
+          width: '30px',
+          height: '30px',
+          backdropFilter: 'blur(8px)',
         }}
       >
         <div
-          className="w-full h-full bg-gradient-to-br from-primary/25 to-chart-2/25 rounded-full border border-white/15 shadow-lg"
+          className="w-full h-full bg-gradient-to-br from-primary/15 to-chart-2/15 rounded-full border border-white/10"
           style={{
-            boxShadow: '0 0 30px rgba(59, 130, 246, 0.3)',
+            boxShadow: '0 0 15px rgba(59, 130, 246, 0.15)',
           }}
         />
         <div
-          className="absolute inset-0 bg-gradient-to-br from-primary/15 to-chart-2/15 rounded-full"
+          className="absolute inset-0 bg-gradient-to-br from-primary/10 to-chart-2/10 rounded-full"
           style={{
-            opacity: 0.4,
-            filter: 'blur(3px)',
+            opacity: 0.25,
+            filter: 'blur(2px)',
           }}
         />
       </motion.div>
 
-      {/* Glowing halo around cursor */}
+      {/* Subtle glowing halo around cursor */}
       <motion.div
         animate={{
-          x: mousePosition.x - 80,
-          y: mousePosition.y - 80,
-          opacity: isVisible ? 0.3 : 0,
+          x: mousePosition.x - 50,
+          y: mousePosition.y - 50,
+          opacity: isVisible ? 0.15 : 0,
         }}
         transition={{
           duration: 0.6,
           ease: 'easeOut',
         }}
-        className="absolute w-40 h-40 rounded-full pointer-events-none"
+        className="absolute rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent)',
-          filter: 'blur(25px)',
+          width: '100px',
+          height: '100px',
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent)',
+          filter: 'blur(20px)',
         }}
       />
     </div>
