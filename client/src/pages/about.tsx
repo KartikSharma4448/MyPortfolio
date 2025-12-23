@@ -3,8 +3,20 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { AboutContent } from "@shared/schema";
 
 export default function About() {
+  const { data: aboutContent, isLoading } = useQuery<AboutContent | null>({
+    queryKey: ["/api/about-content"],
+    queryFn: async () => {
+      const response = await fetch("/api/about-content");
+      if (!response.ok) return null;
+      return response.json();
+    },
+  });
+
   const education = [
     {
       institution: "Vivekananda Global University",
@@ -57,13 +69,44 @@ export default function About() {
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
         {/* Header */}
         <motion.div {...fadeInUp} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">About Me</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I am currently pursuing my Bachelor of Computer Applications (BCA),
-            where I am building a strong foundation in programming, computer
-            science concepts, and modern technologies.
-          </p>
+          {isLoading ? (
+            <div className="space-y-4">
+              <Skeleton className="h-12 w-64 mx-auto rounded-md" />
+              <Skeleton className="h-6 w-48 mx-auto rounded-md" />
+              <Skeleton className="h-20 w-full rounded-md" />
+            </div>
+          ) : (
+            <>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                {aboutContent?.title || "About Me"}
+              </h1>
+              {aboutContent?.subtitle && (
+                <p className="text-lg text-muted-foreground mb-4 max-w-3xl mx-auto">
+                  {aboutContent.subtitle}
+                </p>
+              )}
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                {aboutContent?.description ||
+                  "I am currently pursuing my Bachelor of Computer Applications (BCA), where I am building a strong foundation in programming, computer science concepts, and modern technologies."}
+              </p>
+            </>
+          )}
         </motion.div>
+
+        {/* Stats Section - if available */}
+        {aboutContent?.stats && aboutContent.stats.length > 0 && (
+          <motion.div {...fadeInUp} transition={{ delay: 0.1 }} className="mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {aboutContent.stats.map((stat, index) => (
+                <Card key={index} className="hover-elevate">
+                  <CardContent className="p-6 text-center">
+                    <p className="text-muted-foreground">{stat}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Professional Summary */}
         <motion.div {...fadeInUp} transition={{ delay: 0.2 }}>
