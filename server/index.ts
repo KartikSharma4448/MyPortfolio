@@ -3,6 +3,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { startKeepAlive } from "./keep-alive";
 import { runMigrations } from "./migrate";
+import { validateEnv } from "./config/env";
 
 const app = express();
 
@@ -64,9 +65,18 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Run database migrations first (production only)
-  if (app.get("env") === "production") {
-    await runMigrations();
+  // Validate environment variables
+  validateEnv();
+
+  // Run database migrations if DATABASE_URL is available
+  if (process.env.DATABASE_URL) {
+    try {
+      await runMigrations();
+      log('✅ Database migrations completed successfully');
+    } catch (error) {
+      log('⚠️  Database migrations encountered an issue, but application will continue');
+      console.error('Migration error:', error);
+    }
   }
   
   const server = await registerRoutes(app);

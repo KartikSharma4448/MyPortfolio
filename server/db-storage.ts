@@ -32,6 +32,7 @@ import {
 import session from 'express-session';
 import createMemoryStore from 'memorystore';
 import type { IStorage } from './storage';
+import { seedDatabase } from './seed';
 
 const MemoryStore = createMemoryStore(session);
 
@@ -42,6 +43,8 @@ export class DbStorage implements IStorage {
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000,
     });
+    // Seed database if needed
+    seedDatabase().catch(err => console.error('Seed error:', err));
   }
 
   // Projects

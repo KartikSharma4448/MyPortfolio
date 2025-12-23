@@ -21,6 +21,7 @@ import {
 import { randomUUID } from "crypto";
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import { DbStorage } from "./db-storage";
 
 export interface IStorage {
   getProjects(): Promise<Project[]>;
@@ -479,6 +480,10 @@ export class MemStorage implements IStorage {
       ...insertContent,
       id,
       profileImage: insertContent.profileImage || null,
+      stats: insertContent.stats || null,
+      professionalSummary: insertContent.professionalSummary || null,
+      educationJson: insertContent.educationJson || null,
+      experienceJson: insertContent.experienceJson || null,
       updatedAt: new Date(),
     };
     this.aboutContentData = content;
@@ -486,5 +491,27 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Use memory storage with seed data for this project
-export const storage: IStorage = new MemStorage();
+// Determine which storage to use based on DATABASE_URL
+let storage: IStorage;
+
+// Check if this is Render deployment (by checking for RENDER environment)
+const isRenderDeployment = process.env.RENDER === 'true' || process.env.NODE_ENV === 'production';
+
+if (process.env.DATABASE_URL && isRenderDeployment) {
+  // Use database storage in production (Render with Neon PostgreSQL)
+  try {
+    storage = new DbStorage();
+    console.log('✅ Database storage initialized (Neon PostgreSQL)');
+  } catch (error) {
+    console.error('❌ Failed to initialize database storage, falling back to memory:', error);
+    storage = new MemStorage();
+  }
+} else {
+  // Use memory storage in development/testing (Replit environment)
+  // Even though DATABASE_URL exists in Replit, it's for migration testing only
+  console.log('📝 Using in-memory storage (Replit development)');
+  console.log('ℹ️  On Render with NODE_ENV=production, DbStorage will be used automatically');
+  storage = new MemStorage();
+}
+
+export { storage };

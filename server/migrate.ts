@@ -3,6 +3,7 @@ import { neon } from '@neondatabase/serverless';
 import { migrate } from 'drizzle-orm/neon-http/migrator';
 import { log } from './vite';
 import * as schema from '@shared/schema';
+import { eq } from 'drizzle-orm';
 
 export async function runMigrations() {
   if (!process.env.DATABASE_URL) {
@@ -128,6 +129,9 @@ export async function runMigrations() {
           description TEXT NOT NULL,
           profile_image TEXT,
           stats TEXT[] NOT NULL,
+          professional_summary TEXT,
+          education_json TEXT,
+          experience_json TEXT,
           updated_at TIMESTAMP NOT NULL DEFAULT NOW()
         )
       `;
@@ -141,3 +145,4 @@ export async function runMigrations() {
     // Don't throw - let app start even if migrations fail
   }
 }
+

@@ -21,13 +21,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[ports]]
 localPort = 5000
@@ -37,3 +37,14 @@ externalPort = 80
 deploymentTarget = "autoscale"
 run = ["node", "./dist/index.cjs"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.shared]
+ADMIN_REGISTRATION_SECRET = "k@rtiksharmaisgod4448"
+GMAIL_APP_PASSWORD = "lnpx wlmh aesb sdrg"
+GMAIL_USER = "kartikuma9261@gmail.com"
+NODE_ENV = "production"
+TELEGRAM_BOT_TOKEN = "8489398418:AAE-mCqa_kUzCJmKZy5wtcLuLjs59ABGms0"
+TELEGRAM_CHAT_ID = "5875737070"
+VITE_GA_MEASUREMENT_ID = "G-N6MNBRLY21"

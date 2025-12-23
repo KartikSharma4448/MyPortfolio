@@ -15,6 +15,9 @@ import { queryClient, apiRequest } from "@/lib/queryClient";
 export default function AdminAbout() {
   const { toast } = useToast();
   const [statsInput, setStatsInput] = useState("");
+  const [professionalSummaryInput, setProfessionalSummaryInput] = useState("");
+  const [educationInput, setEducationInput] = useState("");
+  const [experienceInput, setExperienceInput] = useState("");
 
   const { data: aboutContent, isLoading } = useQuery<AboutContent | null>({
     queryKey: ["/api/about-content"],
@@ -44,8 +47,14 @@ export default function AdminAbout() {
         description: aboutContent.description,
         profileImage: aboutContent.profileImage || "",
         stats: aboutContent.stats || [],
+        professionalSummary: (aboutContent as any).professionalSummary || "",
+        educationJson: (aboutContent as any).educationJson || "",
+        experienceJson: (aboutContent as any).experienceJson || "",
       });
       setStatsInput(aboutContent.stats?.join("\n") || "");
+      setProfessionalSummaryInput((aboutContent as any).professionalSummary || "");
+      setEducationInput((aboutContent as any).educationJson || "");
+      setExperienceInput((aboutContent as any).experienceJson || "");
     }
   }, [aboutContent, form]);
 
@@ -76,6 +85,9 @@ export default function AdminAbout() {
       ...data,
       profileImage: data.profileImage || null,
       stats,
+      professionalSummary: professionalSummaryInput || undefined,
+      educationJson: educationInput || undefined,
+      experienceJson: experienceInput || undefined,
     });
   };
 
@@ -172,6 +184,48 @@ export default function AdminAbout() {
                   </p>
                 </div>
 
+                <div>
+                  <Label htmlFor="professionalSummary">Professional Summary</Label>
+                  <Textarea
+                    id="professionalSummary"
+                    data-testid="input-professional-summary"
+                    value={professionalSummaryInput}
+                    onChange={(e) => setProfessionalSummaryInput(e.target.value)}
+                    placeholder="Enter your professional summary (supports multiple paragraphs)"
+                    rows={6}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="educationJson">Education (JSON format)</Label>
+                  <Textarea
+                    id="educationJson"
+                    data-testid="input-education-json"
+                    value={educationInput}
+                    onChange={(e) => setEducationInput(e.target.value)}
+                    placeholder='[{"institution":"University","degree":"Bachelor","specialization":"Field","duration":"2020-2024","grade":"9.0"}]'
+                    rows={8}
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Enter as JSON array with fields: institution, degree, specialization, duration, grade
+                  </p>
+                </div>
+
+                <div>
+                  <Label htmlFor="experienceJson">Experience (JSON format)</Label>
+                  <Textarea
+                    id="experienceJson"
+                    data-testid="input-experience-json"
+                    value={experienceInput}
+                    onChange={(e) => setExperienceInput(e.target.value)}
+                    placeholder='[{"role":"Developer","company":"Company","type":"Full-time","duration":"2023-2024","location":"City","description":"Description"}]'
+                    rows={8}
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Enter as JSON array with fields: role, company, type, duration, location, description
+                  </p>
+                </div>
+
                 <div className="flex gap-2 pt-4">
                   <Button 
                     type="submit" 
@@ -199,8 +253,14 @@ export default function AdminAbout() {
                           description: aboutContent.description,
                           profileImage: aboutContent.profileImage || "",
                           stats: aboutContent.stats || [],
+                          professionalSummary: (aboutContent as any).professionalSummary || "",
+                          educationJson: (aboutContent as any).educationJson || "",
+                          experienceJson: (aboutContent as any).experienceJson || "",
                         });
                         setStatsInput(aboutContent.stats?.join("\n") || "");
+                        setProfessionalSummaryInput((aboutContent as any).professionalSummary || "");
+                        setEducationInput((aboutContent as any).educationJson || "");
+                        setExperienceInput((aboutContent as any).experienceJson || "");
                       }
                     }}
                   >
