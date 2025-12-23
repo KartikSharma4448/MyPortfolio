@@ -1,14 +1,14 @@
 # Kartik Sharma Portfolio - Replit Setup
 
 ## Project Overview
-A full-stack portfolio website for Kartik Sharma, a Software Developer & Freelancer from Jaipur.
+A full-stack portfolio website for Kartik Sharma, a Software Developer & Freelancer from Jaipur, with comprehensive UI animations and 3D effects.
 
 ## Tech Stack
 - **Frontend**: React 18 + TypeScript + Vite + Tailwind CSS + Radix UI components
 - **Backend**: Express.js with REST API
-- **Database**: PostgreSQL (Neon Cloud)
+- **Database**: In-memory MemStorage (development) / PostgreSQL (Neon Cloud for production)
 - **Runtime**: Node.js
-- **Authentication**: Passport.js (Local strategy)
+- **Animations**: Framer Motion (30+ animation variants)
 - **ORM**: Drizzle ORM
 
 ## Setup & Running
@@ -20,8 +20,8 @@ npm run dev
 Runs on `http://localhost:5000`
 
 ### Database
-- Using **Neon PostgreSQL** for production
-- Connection managed via `DATABASE_URL` environment variable
+- Using **MemStorage** for development (in-memory, with seed data)
+- Configured for **Neon PostgreSQL** for production
 - Run migrations: `npm run db:push`
 
 ### Production Build
@@ -33,14 +33,36 @@ npm run start    # Start production server
 ## Key Features
 
 ### Pages
-- Home - Hero section with profile
-- About - Developer background
+- Home - Hero section with 3D animated background + profile
+- About - Developer background with staggered education/experience animations
 - Projects - Portfolio projects with links
 - Services - Service offerings
 - Skills - Technical skills by category
-- Blog - Blog posts with admin editing
+- Blog - Blog posts with staggered card animations
 - Achievements/Certificates - Credentials and achievements
 - Admin Dashboard - Content management (protected with auth)
+
+### Animations & UI Effects
+#### 3D Background System
+- 6 floating geometric shapes (cubes, spheres, toruses)
+- CSS 3D transforms with perspective
+- Continuous rotation on X, Y, Z axes
+- Glowing effects with backdrop blur
+- Mesh grid overlay pattern
+
+#### Page Animations
+- **Fade-in-up** animations on page headings and content
+- **Stagger animations** on card lists (education, experience, contact info, blog posts)
+- **Icon hover effects** - scale and rotate on interaction
+- **Form animations** - smooth fade-in with staggered field appearance
+- **Footer animations** - staggered section transitions
+
+#### Animation Library
+Reusable Framer Motion variants in `client/src/lib/animations.ts`:
+- `fadeInUp` - Standard fade and slide animation
+- `staggerContainer` - Parent container for staggered children
+- `staggerItem` - Individual item animation
+- Plus 25+ additional variants (scale, rotate, bounce, etc.)
 
 ### Database Tables
 - users - Admin user credentials
@@ -67,11 +89,11 @@ npm run start    # Start production server
 
 3. **Frontend Optimization**:
    - DNS prefetch for Google Fonts
-   - AdSense script deferred (non-blocking)
    - Font preconnect for faster loading
+   - Lazy animations on page scroll
 
 ## Environment Variables
-- `DATABASE_URL` - Neon PostgreSQL connection string (Secrets)
+- `DATABASE_URL` - PostgreSQL connection string (Secrets)
 - `VITE_GA_MEASUREMENT_ID` - Google Analytics (optional)
 
 ## Deployment
@@ -81,18 +103,20 @@ Configured for Replit deployment:
 - Start: `npm run start`
 
 ## Recent Changes
-- Dec 22, 2025: Migrated to Neon PostgreSQL, added performance optimizations
-- Added cache control headers for faster page loads
-- Optimized Vite build with code splitting
-- Set up proper DNS prefetching for Google Fonts
+- Dec 23, 2025: Added comprehensive UI animations throughout website
+  - 3D animated background with floating geometric shapes
+  - Staggered animations on About, Contact, Blog, and Footer sections
+  - 30+ reusable Framer Motion animation variants
+  - Smooth transitions and hover effects on all interactive elements
 
-## Recent Updates
-- Dec 22, 2025: Updated favicon with professional headshot photo
-- Favicon now displays in browser tabs and Google search results
-- Performance optimizations applied and database migrated to Neon
+## User Preferences
+- Hinglish communication preferred
+- Focus on animations and visual effects
+- In-memory storage for development (MemStorage)
 
 ## Optimization Recommendations
 - Consider further favicon optimization (current: 768KB) - can be compressed to ~50KB using TinyPNG
 - Add Google Analytics measurement ID for tracking
 - Implement lazy loading for images on projects page
 - Add service worker for offline support (PWA)
+- Consider adding page-scroll triggered animations for better UX

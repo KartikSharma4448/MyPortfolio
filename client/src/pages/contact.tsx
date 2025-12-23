@@ -136,7 +136,6 @@ export default function Contact() {
                   </motion.div>
                 );
               })}
-              </div>
             </div>
 
             <motion.div variants={staggerItem}>
@@ -263,7 +262,7 @@ export default function Contact() {
                 )}
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

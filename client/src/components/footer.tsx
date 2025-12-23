@@ -93,7 +93,7 @@ export function Footer() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="mt-8 pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
