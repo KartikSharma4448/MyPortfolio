@@ -68,9 +68,15 @@ app.use((req, res, next) => {
   // Validate environment variables
   validateEnv();
 
-  // Run database migrations first (production only)
-  if (app.get("env") === "production") {
-    await runMigrations();
+  // Run database migrations if DATABASE_URL is available
+  if (process.env.DATABASE_URL) {
+    try {
+      await runMigrations();
+      log('✅ Database migrations completed successfully');
+    } catch (error) {
+      log('⚠️  Database migrations encountered an issue, but application will continue');
+      console.error('Migration error:', error);
+    }
   }
   
   const server = await registerRoutes(app);
