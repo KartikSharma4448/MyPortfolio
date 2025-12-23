@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Service } from "@shared/schema";
 import * as Icons from "lucide-react";
 
+import { staggerContainer, staggerItem, fadeInUp } from "@/lib/animations";
+
 export default function Services() {
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -15,38 +17,11 @@ export default function Services() {
     return IconComponent ? IconComponent : Briefcase;
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div {...fadeInUp} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Services & Expertise
           </h1>
@@ -62,17 +37,27 @@ export default function Services() {
         ) : services && services.length > 0 ? (
           <>
             <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {services.map((service) => {
                 const Icon = getIcon(service.icon);
                 return (
-                  <motion.div key={service.id} variants={itemVariants}>
+                  <motion.div 
+                    key={service.id} 
+                    variants={staggerItem}
+                    whileHover={{
+                      rotateY: 8,
+                      rotateX: -8,
+                      scale: 1.05,
+                      transition: { duration: 0.3 }
+                    }}
+                    style={{ perspective: '1000px' }}
+                  >
                     <Card
-                      className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full"
+                      className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group h-full"
                       data-testid={`service-${service.id}`}
                     >
                       <CardHeader>

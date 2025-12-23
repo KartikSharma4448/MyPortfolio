@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import type { Project } from "@shared/schema";
 
 export default function Projects() {
@@ -40,12 +41,7 @@ export default function Projects() {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div {...fadeInUp} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Building innovative solutions and learning through hands-on
@@ -69,15 +65,25 @@ export default function Projects() {
               >
                 <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
                 <motion.div
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
+                  variants={staggerContainer}
+                  initial="initial"
+                  animate="animate"
                   className="grid grid-cols-1 lg:grid-cols-2 gap-8"
                 >
                   {featuredProjects.map((project) => (
-                    <motion.div key={project.id} variants={itemVariants}>
+                    <motion.div 
+                      key={project.id} 
+                      variants={staggerItem}
+                      whileHover={{ 
+                        rotateY: 5,
+                        rotateX: -5,
+                        scale: 1.02,
+                        transition: { duration: 0.3 }
+                      }}
+                      style={{ perspective: '1000px' }}
+                    >
                       <Card
-                        className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-xl overflow-hidden group h-full"
+                        className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl overflow-hidden group h-full"
                         data-testid={`project-featured-${project.id}`}
                       >
                         {project.imageUrl && (
@@ -167,7 +173,16 @@ export default function Projects() {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 >
                   {otherProjects.map((project) => (
-                    <motion.div key={project.id} variants={itemVariants}>
+                    <motion.div 
+                      key={project.id} 
+                      variants={staggerItem}
+                      whileHover={{
+                        rotateX: 5,
+                        scale: 1.01,
+                        transition: { duration: 0.2 }
+                      }}
+                      style={{ perspective: '1000px' }}
+                    >
                       <Card
                         className="hover-elevate transition-all duration-300 hover:-translate-y-2 hover:shadow-lg group h-full"
                         data-testid={`project-${project.id}`}
