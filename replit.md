@@ -105,6 +105,17 @@ Configured for Replit deployment:
 
 ## Recent Changes - Dec 23, 2025
 
+### Footer Hash Animation:
+- **Green Animated Hashes**: 15 floating # symbols in footer background
+- **Floating Animation**: Vertical movement with fade in/out effect
+- **Green Color**: text-green-500/30 (light) and text-green-400/25 (dark)
+- **Random Positioning**: Scattered throughout footer background
+- **Varying Speeds**: 3-7 second durations for organic feel
+- **Subtle Design**: Low opacity (0.2-0.6) so hashes don't distract
+- **Background Layer**: Always behind content with pointer-events-none
+
+## Previous Changes - Dec 23, 2025
+
 ### 3D Animations Added to All Pages:
 - **Projects Page**: 3D card perspective transforms with rotateX/rotateY on hover, staggered animations
 - **Services Page**: 3D card flip effects with scale, staggered service cards with perspective

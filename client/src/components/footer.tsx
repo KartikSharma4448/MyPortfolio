@@ -2,13 +2,15 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Linkedin, Github, Mail, MapPin } from "lucide-react";
 import { staggerContainer, staggerItem } from "@/lib/animations";
+import { HashBackground } from "./hash-background";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t bg-card">
-      <div className="container mx-auto px-4 lg:px-8 py-12">
+    <footer className="w-full border-t bg-card relative overflow-hidden">
+      <HashBackground />
+      <div className="container mx-auto px-4 lg:px-8 py-12 relative z-10">
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={staggerContainer}
