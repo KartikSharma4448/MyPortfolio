@@ -10,6 +10,7 @@ import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { CursorTracker } from "@/components/cursor-tracker";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 import Home from "@/pages/home";
@@ -99,6 +100,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <AuthProvider>
           <TooltipProvider>
+            <CursorTracker />
             <div className="min-h-screen flex flex-col">
               <Navbar />
               <main className="flex-1">

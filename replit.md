@@ -104,6 +104,7 @@ Configured for Replit deployment:
 - Start: `npm run start`
 
 ## Recent Changes - Dec 23, 2025
+
 ### 3D Animations Added to All Pages:
 - **Projects Page**: 3D card perspective transforms with rotateX/rotateY on hover, staggered animations
 - **Services Page**: 3D card flip effects with scale, staggered service cards with perspective
@@ -111,16 +112,27 @@ Configured for Replit deployment:
 - **Component Library**: Created reusable `Card3DFlip` component for advanced 3D card effects
 - **Animations Library**: 30+ Framer Motion variants for consistent animations across pages
 
+### Cursor Tracker Animation System:
+- **Global Cursor Tracking**: Mouse position tracked across entire application
+- **3 Layered Objects**: Different sized animated elements follow cursor with delays
+- **Glowing Halo**: Radial gradient glow effect around cursor position
+- **Backdrop Blur**: Frosted glass effect on tracker objects (8px blur)
+- **Smart Visibility**: Objects appear/disappear on mouse enter/leave events
+- **Desktop Optimized**: Hidden on mobile devices (lg breakpoint)
+- **Smooth Motion**: 0.3s transitions with easeOut timing for natural feel
+- **Integrated Globally**: Added to App root for all pages
+
 ### Complete Animation Coverage:
-- ✅ Home - 3D background + floating shapes
-- ✅ About - Staggered cards + icon animations
-- ✅ Projects - 3D card effects + staggered list
-- ✅ Services - 3D perspective transforms + staggered grid
-- ✅ Achievements - Staggered cards + icon scale
-- ✅ Blog - Staggered cards + fade-in
-- ✅ Contact - Staggered form + animated info cards
-- ✅ Social Links - 3D card rotations + animated profile
-- ✅ Footer - Staggered sections + smooth transitions
+- ✅ Home - 3D background + floating shapes + cursor tracker
+- ✅ About - Staggered cards + icon animations + cursor tracker
+- ✅ Projects - 3D card effects + staggered list + cursor tracker
+- ✅ Services - 3D perspective transforms + staggered grid + cursor tracker
+- ✅ Achievements - Staggered cards + icon scale + cursor tracker
+- ✅ Blog - Staggered cards + fade-in + cursor tracker
+- ✅ Contact - Staggered form + animated info cards + cursor tracker
+- ✅ Social Links - 3D card rotations + animated profile + cursor tracker
+- ✅ Footer - Staggered sections + smooth transitions + cursor tracker
+- ✅ **NEW**: Global cursor tracker on all pages with interactive floating objects
 
 ## User Preferences
 - Hinglish communication preferred
