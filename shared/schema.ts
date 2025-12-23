@@ -165,6 +165,9 @@ export const aboutContent = pgTable("about_content", {
   description: text("description").notNull(),
   profileImage: text("profile_image"),
   stats: text("stats").array(),
+  professionalSummary: text("professional_summary"),
+  educationJson: text("education_json"),
+  experienceJson: text("experience_json"),
   updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
 });
 
@@ -174,6 +177,9 @@ export const insertAboutContentSchema = createInsertSchema(aboutContent).omit({
 }).extend({
   profileImage: z.string().nullable().optional(),
   stats: z.array(z.string()).default([]),
+  professionalSummary: z.string().optional(),
+  educationJson: z.string().optional(),
+  experienceJson: z.string().optional(),
 });
 
 export type InsertAboutContent = z.infer<typeof insertAboutContentSchema>;

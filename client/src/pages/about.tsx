@@ -17,7 +17,7 @@ export default function About() {
     },
   });
 
-  const education = [
+  const defaultEducation = [
     {
       institution: "Vivekananda Global University",
       degree: "Bachelor in Computer Applications (BCA)",
@@ -34,7 +34,7 @@ export default function About() {
     },
   ];
 
-  const experience = [
+  const defaultExperience = [
     {
       role: "Computer Teacher",
       company: "Anukriti Prakashan",
@@ -63,6 +63,29 @@ export default function About() {
         "Contributed to backend development by designing and optimizing server-side code while building RESTful APIs for effective data management.",
     },
   ];
+
+  const getEducation = () => {
+    try {
+      return (aboutContent as any)?.educationJson 
+        ? JSON.parse((aboutContent as any).educationJson)
+        : defaultEducation;
+    } catch {
+      return defaultEducation;
+    }
+  };
+
+  const getExperience = () => {
+    try {
+      return (aboutContent as any)?.experienceJson 
+        ? JSON.parse((aboutContent as any).experienceJson)
+        : defaultExperience;
+    } catch {
+      return defaultExperience;
+    }
+  };
+
+  const education = getEducation();
+  const experience = getExperience();
 
   return (
     <div className="min-h-screen py-20">
@@ -118,23 +141,29 @@ export default function About() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground leading-relaxed">
-            <p>
-              My academic curriculum has provided me with exposure to
-              programming languages such as C, Python, and Java, as well as
-              practical knowledge in web development, database management, and
-              cloud computing.
-            </p>
-            <p>
-              I am passionate about applying my theoretical knowledge to
-              real-world projects. I have gained hands-on experience through
-              internships and teaching roles, where I've developed both
-              technical expertise and communication skills.
-            </p>
-            <p>
-              I'm actively seeking opportunities to contribute to innovative
-              projects, expand my skill set, and grow as a professional in the
-              tech industry.
-            </p>
+            {(aboutContent as any)?.professionalSummary ? (
+              <p>{(aboutContent as any).professionalSummary}</p>
+            ) : (
+              <>
+                <p>
+                  My academic curriculum has provided me with exposure to
+                  programming languages such as C, Python, and Java, as well as
+                  practical knowledge in web development, database management, and
+                  cloud computing.
+                </p>
+                <p>
+                  I am passionate about applying my theoretical knowledge to
+                  real-world projects. I have gained hands-on experience through
+                  internships and teaching roles, where I've developed both
+                  technical expertise and communication skills.
+                </p>
+                <p>
+                  I'm actively seeking opportunities to contribute to innovative
+                  projects, expand my skill set, and grow as a professional in the
+                  tech industry.
+                </p>
+              </>
+            )}
           </CardContent>
         </Card>
         </motion.div>
