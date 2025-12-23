@@ -2,7 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { startKeepAlive } from "./keep-alive";
-import { runMigrations } from "./migrate";
+import { runMigrations, seedDatabase } from "./migrate";
 
 const app = express();
 
@@ -67,6 +67,8 @@ app.use((req, res, next) => {
   // Run database migrations first (production only)
   if (app.get("env") === "production") {
     await runMigrations();
+    // Seed database if empty
+    await seedDatabase();
   }
   
   const server = await registerRoutes(app);
