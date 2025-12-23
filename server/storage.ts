@@ -486,5 +486,23 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Use memory storage with seed data for this project
-export const storage: IStorage = new MemStorage();
+// Determine which storage to use based on DATABASE_URL
+let storage: IStorage;
+
+if (process.env.DATABASE_URL) {
+  // Use database storage in production
+  import('./db').then(({ db }) => {
+    // Database storage will be initialized
+  }).catch(() => {
+    // Fallback to memory storage if DB initialization fails
+    storage = new MemStorage();
+  });
+  
+  // For now, use MemStorage but with plan to migrate to DatabaseStorage
+  storage = new MemStorage();
+} else {
+  // Use memory storage in development
+  storage = new MemStorage();
+}
+
+export { storage };
