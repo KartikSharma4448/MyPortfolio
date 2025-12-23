@@ -17,52 +17,6 @@ export default function About() {
     },
   });
 
-  const defaultEducation = [
-    {
-      institution: "Vivekananda Global University",
-      degree: "Bachelor in Computer Applications (BCA)",
-      specialization: "Full Stack and Cloud Computing",
-      duration: "Sep 2024 - Jul 2027",
-      grade: "9.43 CGPA",
-    },
-    {
-      institution: "A.S. Public Senior Secondary School",
-      degree: "12th Grade",
-      specialization: "Science (Mathematics)",
-      duration: "Completed",
-      grade: "96%",
-    },
-  ];
-
-  const defaultExperience = [
-    {
-      role: "Computer Teacher",
-      company: "Anukriti Prakashan",
-      type: "Part-time",
-      duration: "Mar 2025 - Present",
-      location: "Jaipur, Rajasthan, India",
-      description:
-        "Teaching computer fundamentals and modern technologies to students, developing curriculum materials, and fostering digital literacy.",
-    },
-    {
-      role: "Computer Teacher",
-      company: "InfoSphere",
-      type: "Part-time",
-      duration: "Sep 2024 - Aug 2025",
-      location: "Jaipur, Rajasthan, India",
-      description:
-        "Taught the RS-CIT course, focusing on computer fundamentals and digital literacy. Designed engaging lessons and provided hands-on training.",
-    },
-    {
-      role: "Back End Developer",
-      company: "Zenz Aawara",
-      type: "Internship",
-      duration: "May 2025 - Jul 2025",
-      location: "Jaipur, Rajasthan, India (Hybrid)",
-      description:
-        "Contributed to backend development by designing and optimizing server-side code while building RESTful APIs for effective data management.",
-    },
-  ];
 
   const getEducation = () => {
     try {
