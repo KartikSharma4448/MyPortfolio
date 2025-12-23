@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
 import { useAuth } from "@/hooks/use-auth";
-import { useClickSound } from "@/hooks/use-click-sound";
 import { fadeInDown, staggerContainer, staggerItem } from "@/lib/animations";
 
 export function Navbar() {
@@ -13,7 +12,6 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useAuth();
-  const { playClickSound } = useClickSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +56,6 @@ export function Navbar() {
             <Link
               href="/"
               data-testid="link-home"
-              onClick={playClickSound}
               className="text-xl font-bold tracking-tight hover-elevate active-elevate-2 px-2 py-1 rounded-md"
             >
               Kartik<span className="text-primary">.</span>
@@ -77,7 +74,6 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   data-testid={`link-nav-${link.label.toLowerCase().replace(" ", "-")}`}
-                  onClick={playClickSound}
                   className={`px-4 py-2 rounded-md text-sm font-medium transition-colors hover-elevate active-elevate-2 block ${
                     isActive(link.href)
                       ? "bg-accent text-accent-foreground"
@@ -96,7 +92,7 @@ export function Navbar() {
             </motion.div>
             {user && (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/admin" onClick={playClickSound}>
+                <Link href="/admin">
                   <Button
                     variant="default"
                     size="sm"
@@ -115,10 +111,7 @@ export function Navbar() {
                 variant="ghost"
                 size="icon"
                 className="md:hidden hover-elevate active-elevate-2"
-                onClick={() => {
-                  playClickSound();
-                  setIsMobileMenuOpen(!isMobileMenuOpen);
-                }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 data-testid="button-mobile-menu"
               >
                 <AnimatePresence mode="wait">
