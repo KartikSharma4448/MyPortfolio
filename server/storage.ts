@@ -21,6 +21,7 @@ import {
 import { randomUUID } from "crypto";
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import { DbStorage } from "./db-storage";
 
 export interface IStorage {
   getProjects(): Promise<Project[]>;
@@ -479,6 +480,10 @@ export class MemStorage implements IStorage {
       ...insertContent,
       id,
       profileImage: insertContent.profileImage || null,
+      stats: insertContent.stats || null,
+      professionalSummary: insertContent.professionalSummary || null,
+      educationJson: insertContent.educationJson || null,
+      experienceJson: insertContent.experienceJson || null,
       updatedAt: new Date(),
     };
     this.aboutContentData = content;
@@ -489,20 +494,8 @@ export class MemStorage implements IStorage {
 // Determine which storage to use based on DATABASE_URL
 let storage: IStorage;
 
-if (process.env.DATABASE_URL) {
-  // Use database storage in production
-  import('./db').then(({ db }) => {
-    // Database storage will be initialized
-  }).catch(() => {
-    // Fallback to memory storage if DB initialization fails
-    storage = new MemStorage();
-  });
-  
-  // For now, use MemStorage but with plan to migrate to DatabaseStorage
-  storage = new MemStorage();
-} else {
-  // Use memory storage in development
-  storage = new MemStorage();
-}
+// For now, use MemStorage for stability
+// Database infrastructure (DbStorage) is set up and ready to use
+storage = new MemStorage();
 
 export { storage };
