@@ -3,18 +3,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function PrivacyPolicy() {
   useEffect(() => {
-    document.title = "Privacy Policy | Kartik Sharma - Software Developer Portfolio";
-    
+    document.title = "Privacy Policy | Kartik Sharma Portfolio";
+
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Privacy Policy for Kartik Sharma's portfolio website. Learn how we collect, use, and protect your personal information."
+        "Privacy Policy of Kartik Sharma portfolio website. Learn how user data is collected, used and protected."
       );
     } else {
       const meta = document.createElement("meta");
       meta.name = "description";
-      meta.content = "Privacy Policy for Kartik Sharma's portfolio website. Learn how we collect, use, and protect your personal information.";
+      meta.content =
+        "Privacy Policy of Kartik Sharma portfolio website. Learn how user data is collected, used and protected.";
       document.head.appendChild(meta);
     }
   }, []);
@@ -22,23 +23,29 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-privacy-title">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Privacy Policy
         </h1>
-        <p className="text-muted-foreground mb-8">
-          Last updated: {new Date().toLocaleDateString()}
+
+        <p className="text-muted-foreground mb-10">
+          Last Updated: {new Date().toLocaleDateString()}
         </p>
 
         <div className="space-y-6">
+
           <Card>
             <CardHeader>
               <CardTitle>Introduction</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="space-y-3 text-muted-foreground">
               <p>
-                Welcome to Kartik Sharma's portfolio website. This Privacy Policy explains how we collect,
-                use, disclose, and safeguard your information when you visit our website. Please read this
-                privacy policy carefully.
+                This Privacy Policy describes how Kartik Sharma (“we”, “our”, “us”)
+                collects, uses, and protects information when users visit this
+                portfolio website or interact through contact forms or services.
+              </p>
+              <p>
+                By using this website, you agree to the practices described in
+                this policy.
               </p>
             </CardContent>
           </Card>
@@ -47,63 +54,71 @@ export default function PrivacyPolicy() {
             <CardHeader>
               <CardTitle>Information We Collect</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
-              <h3>Personal Data</h3>
-              <p>
-                When you use our contact form, we collect personally identifiable information that you
-                voluntarily provide to us, including:
-              </p>
-              <ul>
+            <CardContent className="space-y-3 text-muted-foreground">
+              <p className="font-semibold">Personal Information</p>
+              <ul className="list-disc pl-6">
                 <li>Name</li>
-                <li>Email address</li>
-                <li>Message content</li>
+                <li>Email Address</li>
+                <li>Phone Number (if provided)</li>
+                <li>Message / Inquiry Content</li>
               </ul>
 
-              <h3>Automatically Collected Information</h3>
-              <p>
-                When you visit our website, we may automatically collect certain information about your device,
-                including:
-              </p>
-              <ul>
-                <li>Browser type</li>
-                <li>Operating system</li>
-                <li>IP address</li>
-                <li>Pages visited and time spent on pages</li>
+              <p className="font-semibold mt-4">Automatically Collected Data</p>
+              <ul className="list-disc pl-6">
+                <li>IP Address</li>
+                <li>Browser & Device Information</li>
+                <li>Pages Visited</li>
+                <li>Session Duration</li>
+                <li>Referral Source</li>
               </ul>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>How We Use Your Information</CardTitle>
+              <CardTitle>How We Use Information</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
-              <p>We use the information we collect to:</p>
-              <ul>
-                <li>Respond to your inquiries and provide customer support</li>
-                <li>Send you updates and communications you have requested</li>
-                <li>Improve our website and user experience</li>
-                <li>Monitor and analyze website usage and trends</li>
-                <li>Prevent fraudulent transactions and monitor against theft</li>
+            <CardContent className="text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Respond to user inquiries and collaboration requests</li>
+                <li>Provide services, project discussions or opportunities</li>
+                <li>Improve website performance and user experience</li>
+                <li>Analyze traffic and engagement trends</li>
+                <li>Prevent spam, fraud, or security threats</li>
+                <li>Send updates only when user consent is given</li>
               </ul>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Disclosure of Your Information</CardTitle>
+              <CardTitle>Cookies & Tracking</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="space-y-3 text-muted-foreground">
               <p>
-                We do not sell, trade, or otherwise transfer your personally identifiable information to
-                third parties without your consent, except:
+                This website may use cookies or analytics tools to understand
+                visitor behavior and improve functionality.
               </p>
-              <ul>
-                <li>To comply with legal obligations</li>
-                <li>To protect and defend our rights or property</li>
-                <li>To prevent or investigate possible wrongdoing</li>
-                <li>With your explicit consent</li>
-              </ul>
+              <p>
+                Users can disable cookies through browser settings. Some features
+                may not function properly after disabling cookies.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Third Party Services</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-muted-foreground">
+              <p>
+                We may use trusted third-party tools such as hosting providers,
+                analytics services, form handlers, or payment services (future use).
+              </p>
+              <p>
+                These services may process limited data strictly for functionality.
+                We do not sell or rent personal information.
+              </p>
             </CardContent>
           </Card>
 
@@ -111,65 +126,94 @@ export default function PrivacyPolicy() {
             <CardHeader>
               <CardTitle>Data Security</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="space-y-3 text-muted-foreground">
               <p>
-                We use administrative, technical, and physical security measures to protect your personal
-                information. While we have taken reasonable steps to secure the personal information you
-                provide to us, please be aware that no security measures are perfect or impenetrable.
+                We implement reasonable security practices to protect user data.
+                However, no digital transmission or storage system is completely secure.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Cookies and Tracking Technologies</CardTitle>
+              <CardTitle>Data Retention</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="text-muted-foreground">
               <p>
-                We may use cookies and similar tracking technologies to access or store information. You can
-                instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+                Personal information is retained only as long as necessary for
+                communication, service delivery, or legal obligations.
+                Users may request deletion at any time.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Your Rights</CardTitle>
+              <CardTitle>User Rights</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
-              <p>You have the right to:</p>
-              <ul>
-                <li>Access the personal information we hold about you</li>
-                <li>Request correction of inaccurate personal information</li>
-                <li>Request deletion of your personal information</li>
-                <li>Object to processing of your personal information</li>
-                <li>Withdraw consent at any time</li>
+            <CardContent className="text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Request access to stored personal data</li>
+                <li>Request correction or update</li>
+                <li>Request deletion</li>
+                <li>Withdraw communication consent</li>
               </ul>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Changes to This Privacy Policy</CardTitle>
+              <CardTitle>External Links</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="text-muted-foreground">
               <p>
-                We may update this Privacy Policy from time to time. We will notify you of any changes by
-                posting the new Privacy Policy on this page and updating the "Last updated" date.
+                This website may contain links to platforms such as GitHub,
+                LinkedIn, or CodeUpPath. We are not responsible for privacy
+                practices of external websites.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Contact Us</CardTitle>
+              <CardTitle>Children’s Privacy</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+            <CardContent className="text-muted-foreground">
               <p>
-                If you have any questions about this Privacy Policy, please contact us through our contact form.
+                This website is not intended for children under 13 years of age.
+                We do not knowingly collect data from minors.
               </p>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Policy Updates</CardTitle>
+            </CardHeader>
+            <CardContent className="text-muted-foreground">
+              <p>
+                We may update this policy periodically. Continued use of the
+                website indicates acceptance of updated terms.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Contact</CardTitle>
+            </CardHeader>
+            <CardContent className="text-muted-foreground">
+              <p>
+                For privacy related concerns, contact:
+              </p>
+              <p className="mt-2">
+                Kartik Sharma <br />
+                Email: your-email@example.com <br />
+                Website Contact Form
+              </p>
+            </CardContent>
+          </Card>
+
         </div>
       </div>
     </div>
