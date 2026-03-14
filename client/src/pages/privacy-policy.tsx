@@ -208,8 +208,7 @@ export default function PrivacyPolicy() {
               </p>
               <p className="mt-2">
                 Kartik Sharma <br />
-                Email: your-email@example.com <br />
-                Website Contact Form
+                Email: kartikuma9261@gmail.com <br />
               </p>
             </CardContent>
           </Card>
