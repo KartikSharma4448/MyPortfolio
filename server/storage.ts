@@ -494,11 +494,8 @@ export class MemStorage implements IStorage {
 // Determine which storage to use based on DATABASE_URL
 let storage: IStorage;
 
-// Check if this is Render deployment (by checking for RENDER environment)
-const isRenderDeployment = process.env.RENDER === 'true' || process.env.NODE_ENV === 'production';
-
-if (process.env.DATABASE_URL && isRenderDeployment) {
-  // Use database storage in production (Render with Neon PostgreSQL)
+if (process.env.DATABASE_URL) {
+  // Use database storage whenever DATABASE_URL is available
   try {
     storage = new DbStorage();
     console.log('✅ Database storage initialized (Neon PostgreSQL)');
@@ -507,10 +504,8 @@ if (process.env.DATABASE_URL && isRenderDeployment) {
     storage = new MemStorage();
   }
 } else {
-  // Use memory storage in development/testing (Replit environment)
-  // Even though DATABASE_URL exists in Replit, it's for migration testing only
-  console.log('📝 Using in-memory storage (Replit development)');
-  console.log('ℹ️  On Render with NODE_ENV=production, DbStorage will be used automatically');
+  // Fall back to in-memory storage if no DATABASE_URL
+  console.log('📝 Using in-memory storage (no DATABASE_URL configured)');
   storage = new MemStorage();
 }
 
