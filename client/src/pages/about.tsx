@@ -1,4 +1,4 @@
-import { GraduationCap, Briefcase, MapPin, Sparkles, ExternalLink, Calendar, Building2 } from "lucide-react";
+import { GraduationCap, Briefcase, MapPin, Sparkles, ExternalLink, Calendar, Building2, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -178,6 +178,16 @@ export default function About() {
                         Hire Me
                       </Button>
                     </Link>
+                    <a
+                      href="/Kartik_Sharma_CV.pdf"
+                      download="Kartik_Sharma_CV.pdf"
+                      data-testid="button-download-cv"
+                    >
+                      <Button size="sm" variant="outline" className="border-chart-2/40 text-chart-2 hover:bg-chart-2/10 hover:text-chart-2 hover:border-chart-2/60 transition-all duration-200">
+                        <Download className="h-4 w-4 mr-2" />
+                        Download CV
+                      </Button>
+                    </a>
                     <Link href="/projects">
                       <Button size="sm" variant="outline">
                         View Projects
