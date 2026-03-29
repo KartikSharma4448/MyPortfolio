@@ -12,6 +12,7 @@ import {
   insertContactMessageSchema,
   insertBlogPostSchema,
   insertAboutContentSchema,
+  insertProductSchema,
 } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -330,6 +331,39 @@ app.post("/api/contact", async (req, res) => {
     }
     const content = await storage.createOrUpdateAboutContent(result.data);
     res.json(content);
+  });
+
+  // Products routes
+  app.get("/api/products", async (_req, res) => {
+    const result = await storage.getProducts();
+    res.json(result);
+  });
+
+  app.get("/api/products/:id", async (req, res) => {
+    const product = await storage.getProduct(req.params.id);
+    if (!product) return res.status(404).json({ error: "Product not found" });
+    res.json(product);
+  });
+
+  app.post("/api/products", ensureAuthenticated, async (req, res) => {
+    const result = insertProductSchema.safeParse(req.body);
+    if (!result.success) return res.status(400).json({ error: result.error.message });
+    const product = await storage.createProduct(result.data);
+    res.json(product);
+  });
+
+  app.patch("/api/products/:id", ensureAuthenticated, async (req, res) => {
+    const result = insertProductSchema.safeParse(req.body);
+    if (!result.success) return res.status(400).json({ error: result.error.message });
+    const product = await storage.updateProduct(req.params.id, result.data);
+    if (!product) return res.status(404).json({ error: "Product not found" });
+    res.json(product);
+  });
+
+  app.delete("/api/products/:id", ensureAuthenticated, async (req, res) => {
+    const success = await storage.deleteProduct(req.params.id);
+    if (!success) return res.status(404).json({ error: "Product not found" });
+    res.json({ success: true });
   });
 
   const httpServer = createServer(app);

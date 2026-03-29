@@ -17,6 +17,8 @@ import {
   type InsertBlogPost,
   type AboutContent,
   type InsertAboutContent,
+  type Product,
+  type InsertProduct,
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import session from "express-session";
@@ -71,6 +73,12 @@ export interface IStorage {
   getAboutContent(): Promise<AboutContent | undefined>;
   createOrUpdateAboutContent(content: InsertAboutContent): Promise<AboutContent>;
 
+  getProducts(): Promise<Product[]>;
+  getProduct(id: string): Promise<Product | undefined>;
+  createProduct(product: InsertProduct): Promise<Product>;
+  updateProduct(id: string, product: InsertProduct): Promise<Product | undefined>;
+  deleteProduct(id: string): Promise<boolean>;
+
   sessionStore: session.Store;
 }
 
@@ -87,6 +95,7 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private userIdCounter: number;
   private aboutContentData: AboutContent | undefined;
+  private productsMap: Map<string, Product>;
   public sessionStore: session.Store;
 
   constructor() {
@@ -100,6 +109,7 @@ export class MemStorage implements IStorage {
     this.users = new Map();
     this.userIdCounter = 1;
     this.aboutContentData = undefined;
+    this.productsMap = new Map();
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000,
     });
@@ -488,6 +498,53 @@ export class MemStorage implements IStorage {
     };
     this.aboutContentData = content;
     return content;
+  }
+
+  async getProducts(): Promise<Product[]> {
+    return Array.from(this.productsMap.values()).sort((a, b) => parseInt(a.order) - parseInt(b.order));
+  }
+
+  async getProduct(id: string): Promise<Product | undefined> {
+    return this.productsMap.get(id);
+  }
+
+  async createProduct(insertProduct: InsertProduct): Promise<Product> {
+    const id = randomUUID();
+    const product: Product = {
+      ...insertProduct,
+      id,
+      imageUrl: insertProduct.imageUrl || null,
+      demoUrl: insertProduct.demoUrl || null,
+      features: insertProduct.features || [],
+      technologies: insertProduct.technologies || [],
+      featured: insertProduct.featured || 'false',
+      order: insertProduct.order || '0',
+      createdAt: new Date(),
+    };
+    this.productsMap.set(id, product);
+    return product;
+  }
+
+  async updateProduct(id: string, insertProduct: InsertProduct): Promise<Product | undefined> {
+    const existing = this.productsMap.get(id);
+    if (!existing) return undefined;
+    const updated: Product = {
+      ...insertProduct,
+      id,
+      imageUrl: insertProduct.imageUrl || null,
+      demoUrl: insertProduct.demoUrl || null,
+      features: insertProduct.features || [],
+      technologies: insertProduct.technologies || [],
+      featured: insertProduct.featured || 'false',
+      order: insertProduct.order || '0',
+      createdAt: existing.createdAt,
+    };
+    this.productsMap.set(id, updated);
+    return updated;
+  }
+
+  async deleteProduct(id: string): Promise<boolean> {
+    return this.productsMap.delete(id);
   }
 }
 

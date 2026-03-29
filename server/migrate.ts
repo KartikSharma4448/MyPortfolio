@@ -138,6 +138,24 @@ export async function runMigrations() {
       
       log('✅ Database tables created successfully');
     }
+
+    // Always ensure products table exists (new addition)
+    await sql`
+      CREATE TABLE IF NOT EXISTS products (
+        id VARCHAR PRIMARY KEY DEFAULT gen_random_uuid(),
+        title TEXT NOT NULL,
+        description TEXT NOT NULL,
+        category TEXT NOT NULL,
+        price TEXT NOT NULL,
+        image_url TEXT,
+        demo_url TEXT,
+        features TEXT[] NOT NULL DEFAULT ARRAY[]::text[],
+        technologies TEXT[] NOT NULL DEFAULT ARRAY[]::text[],
+        featured TEXT NOT NULL DEFAULT 'false',
+        "order" TEXT NOT NULL DEFAULT '0',
+        created_at TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `;
     
     log('✅ Migrations completed');
   } catch (error) {

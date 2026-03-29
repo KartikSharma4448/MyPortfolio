@@ -10,6 +10,7 @@ import {
   users,
   blogPosts,
   aboutContent,
+  products,
   type Project,
   type InsertProject,
   type Certificate,
@@ -28,6 +29,8 @@ import {
   type InsertBlogPost,
   type AboutContent,
   type InsertAboutContent,
+  type Product,
+  type InsertProduct,
 } from '@shared/schema';
 import session from 'express-session';
 import createMemoryStore from 'memorystore';
@@ -396,5 +399,30 @@ export class DbStorage implements IStorage {
         .returning();
       return result[0];
     }
+  }
+
+  // Products
+  async getProducts(): Promise<Product[]> {
+    return await db.select().from(products).orderBy(products.order);
+  }
+
+  async getProduct(id: string): Promise<Product | undefined> {
+    const result = await db.select().from(products).where(eq(products.id, id));
+    return result[0];
+  }
+
+  async createProduct(insertProduct: InsertProduct): Promise<Product> {
+    const result = await db.insert(products).values(insertProduct).returning();
+    return result[0];
+  }
+
+  async updateProduct(id: string, insertProduct: InsertProduct): Promise<Product | undefined> {
+    const result = await db.update(products).set(insertProduct).where(eq(products.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteProduct(id: string): Promise<boolean> {
+    const result = await db.delete(products).where(eq(products.id, id)).returning();
+    return result.length > 0;
   }
 }

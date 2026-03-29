@@ -6,17 +6,17 @@ import {
   Code, 
   Briefcase,
   Share2,
-  MessageSquare,
   BookOpen,
   LogOut,
-  User
+  User,
+  ShoppingBag,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/use-auth";
-import type { Project, Certificate, Skill, Service, SocialLink, BlogPost } from "@shared/schema";
+import type { Project, Certificate, Skill, Service, SocialLink, BlogPost, Product } from "@shared/schema";
 
 export default function Admin() {
   const [location] = useLocation();
@@ -44,6 +44,10 @@ export default function Admin() {
 
   const { data: blogPosts } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-posts"],
+  });
+
+  const { data: products } = useQuery<Product[]>({
+    queryKey: ["/api/products"],
   });
 
   const stats = [
@@ -89,15 +93,22 @@ export default function Admin() {
       color: "text-chart-5",
       link: "/admin/blog",
     },
+    {
+      title: "Products",
+      count: products?.length || 0,
+      icon: ShoppingBag,
+      color: "text-primary",
+      link: "/admin/products",
+    },
   ];
 
   const quickActions = [
     { label: "Edit About Page", href: "/admin/about", icon: User },
+    { label: "Add Product", href: "/admin/products", icon: ShoppingBag },
     { label: "Add Project", href: "/admin/projects", icon: FolderOpen },
     { label: "Add Certificate", href: "/admin/certificates", icon: Award },
     { label: "Add Skill", href: "/admin/skills", icon: Code },
     { label: "Add Service", href: "/admin/services", icon: Briefcase },
-    { label: "Add Social Link", href: "/admin/social-links", icon: Share2 },
     { label: "Add Blog Post", href: "/admin/blog", icon: BookOpen },
   ];
 
@@ -218,6 +229,15 @@ export default function Admin() {
                   data-testid="link-manage-blog"
                 >
                   Manage Blog
+                </Button>
+              </Link>
+              <Link href="/admin/products">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  data-testid="link-manage-products"
+                >
+                  Manage Products
                 </Button>
               </Link>
             </CardContent>

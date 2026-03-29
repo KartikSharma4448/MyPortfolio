@@ -184,3 +184,27 @@ export const insertAboutContentSchema = createInsertSchema(aboutContent).omit({
 
 export type InsertAboutContent = z.infer<typeof insertAboutContentSchema>;
 export type AboutContent = typeof aboutContent.$inferSelect;
+
+// Products table (for selling portfolio websites, apps, UI kits)
+export const products = pgTable("products", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  category: text("category").notNull(), // 'portfolio' | 'app' | 'app-ui'
+  price: text("price").notNull(),
+  imageUrl: text("image_url"),
+  demoUrl: text("demo_url"),
+  features: text("features").array().notNull().default(sql`ARRAY[]::text[]`),
+  technologies: text("technologies").array().notNull().default(sql`ARRAY[]::text[]`),
+  featured: text("featured").notNull().default('false'),
+  order: text("order").notNull().default('0'),
+  createdAt: timestamp("created_at").notNull().default(sql`now()`),
+});
+
+export const insertProductSchema = createInsertSchema(products).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertProduct = z.infer<typeof insertProductSchema>;
+export type Product = typeof products.$inferSelect;
