@@ -127,7 +127,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 text-white"
             >
               Hi, I'm{" "}
               <span className="bg-gradient-to-r from-primary to-chart-2 bg-clip-text text-transparent inline-block animate-gradient">
@@ -149,7 +149,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
+              className="text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed"
             >
               BCA student from Jaipur, turning complex problems into elegant digital solutions.
               Open to internships, freelance work, and collaborations.
@@ -172,12 +172,11 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="group relative overflow-hidden" data-testid="button-contact-me">
+                <Button size="lg" variant="outline" className="group relative overflow-hidden border-white/30 text-white hover:text-white hover:bg-white/10" data-testid="button-contact-me">
                   <span className="relative z-10 flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     Contact Me
                   </span>
-                  <div className="absolute inset-0 bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300" />
                 </Button>
               </Link>
             </motion.div>
@@ -190,17 +189,17 @@ export default function Home() {
               className="flex gap-3 justify-center mb-10"
             >
               <a href="https://linkedin.com/in/kartik-sharma06" target="_blank" rel="noopener noreferrer" data-testid="link-linkedin">
-                <Button variant="ghost" size="icon" className="hover:text-blue-400 hover:border-blue-400/30 border border-transparent hover:bg-blue-500/10 transition-all duration-300">
+                <Button variant="ghost" size="icon" className="text-white/60 hover:text-blue-400 hover:border-blue-400/30 border border-white/10 hover:bg-blue-500/10 transition-all duration-300">
                   <Linkedin className="h-5 w-5" />
                 </Button>
               </a>
               <a href="https://github.com/kartiksharma4448" target="_blank" rel="noopener noreferrer" data-testid="link-github">
-                <Button variant="ghost" size="icon" className="hover:text-foreground hover:border-border border border-transparent hover:bg-muted transition-all duration-300">
+                <Button variant="ghost" size="icon" className="text-white/60 hover:text-white border border-white/10 hover:bg-white/10 transition-all duration-300">
                   <Github className="h-5 w-5" />
                 </Button>
               </a>
               <Link href="/contact">
-                <Button variant="ghost" size="icon" className="hover:text-primary hover:border-primary/30 border border-transparent hover:bg-primary/10 transition-all duration-300" data-testid="button-email-icon">
+                <Button variant="ghost" size="icon" className="text-white/60 hover:text-primary hover:border-primary/30 border border-white/10 hover:bg-primary/10 transition-all duration-300" data-testid="button-email-icon">
                   <Mail className="h-5 w-5" />
                 </Button>
               </Link>
@@ -213,7 +212,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 1.3 }}
               className="animate-bounce opacity-60"
             >
-              <ArrowDown className="h-6 w-6 mx-auto text-muted-foreground" />
+              <ArrowDown className="h-6 w-6 mx-auto text-white/50" />
             </motion.div>
           </div>
         </motion.div>
