@@ -1,0 +1,6 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development node_modules/.bin/tsx server/index.ts
+
+[1G[0Ksh: 1: node_modules/.bin/tsx: not found
+[1G[0K⠙[1G[0K

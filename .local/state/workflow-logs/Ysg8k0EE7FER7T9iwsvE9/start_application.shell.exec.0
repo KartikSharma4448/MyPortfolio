@@ -1,0 +1,193 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development node_modules/.bin/tsx server/index.ts
+
+[1G[0K✅ Database storage initialized (Neon PostgreSQL)
+⚠️  Environment variable OPENAI_API_KEY not found
+⚠️  Environment variable STRIPE_SECRET_KEY not found
+4:07:46 PM [express] Running database migrations...
+4:07:46 PM [express] Database tables already exist
+4:07:46 PM [express] ✅ Migrations completed
+4:07:46 PM [express] ✅ Database migrations completed successfully
+4:07:47 PM [express] serving on port 5000
+4:07:47 PM [express] Keep-alive service disabled in development mode
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+4:07:53 PM [express] GET /api/user 401 in 1ms
+4:07:54 PM [express] GET /api/certificates 304 in 200ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376de…
+4:07:54 PM [express] GET /api/projects 304 in 208ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec"…
+4:08:01 PM [express] GET /api/user 401 in 1ms
+4:08:01 PM [express] GET /api/certificates 200 in 213ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376de…
+4:08:01 PM [express] GET /api/projects 200 in 235ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec"…
+4:08:04 PM [express] GET /api/user 401 in 1ms
+4:08:04 PM [express] GET /api/certificates 304 in 70ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376def…
+4:08:04 PM [express] GET /api/projects 304 in 71ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec",…
+4:08:09 PM [express] GET /api/user 401 in 1ms
+4:08:09 PM [express] GET /api/products 200 in 252ms :: []
+4:08:10 PM [express] GET /api/products 200 in 77ms :: []
+4:09:38 PM [express] GET /api/user 401 in 1ms
+4:09:38 PM [express] GET /api/projects 304 in 241ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec"…
+4:09:38 PM [express] GET /api/certificates 304 in 240ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376de…
+4:09:41 PM [express] GET /api/user 401 in 1ms
+4:09:41 PM [express] GET /api/about-content 200 in 74ms :: {"id":"c181ddfe-d0b1-4e25-b250-06def5caaf…
+4:09:44 PM [express] GET /api/user 401 in 1ms
+4:09:52 PM [express] GET /api/user 401 in 1ms
+4:09:52 PM [express] GET /api/services 200 in 211ms :: [{"id":"696d9a4b-1859-423b-a2ab-17064fb52d73"…
+4:09:55 PM [express] GET /api/user 401 in 2ms
+4:09:55 PM [express] GET /api/skills 200 in 74ms :: [{"id":"644b1d64-91a8-42e9-8747-dee0c986d278","n…
+4:09:58 PM [express] GET /api/user 401 in 2ms
+4:11:57 PM [express] GET /api/user 401 in 1ms
+4:11:57 PM [express] GET /api/projects 304 in 280ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec"…
+4:11:57 PM [express] GET /api/certificates 304 in 280ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376de…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:14:29 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/home.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
+4:14:49 PM [express] GET /api/user 401 in 1ms
+4:14:50 PM [express] GET /api/certificates 304 in 268ms :: [{"id":"dcf3b471-4c74-424e-96f6-4578376de…
+4:14:50 PM [express] GET /api/projects 304 in 284ms :: [{"id":"dd97b95c-ef81-4fe4-abf5-66e3d95ea0ec"…
+4:15:00 PM [express] GET /api/about-content 304 in 202ms :: {"id":"c181ddfe-d0b1-4e25-b250-06def5caa…
+4:15:06 PM [express] GET /api/skills 200 in 198ms :: [{"id":"644b1d64-91a8-42e9-8747-dee0c986d278","…
+4:15:14 PM [express] GET /api/products 304 in 194ms :: []
+4:15:18 PM [express] GET /api/services 200 in 71ms :: [{"id":"696d9a4b-1859-423b-a2ab-17064fb52d73",…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:15:30 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/about.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:16:00 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/services.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:16:38 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/contact.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:17:24 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/projects.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m4:18:19 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/achievements.tsx, /src/index.css?v=oFukEy-JGzl2bXsV6ViSb[22m
