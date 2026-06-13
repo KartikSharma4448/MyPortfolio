@@ -1,7 +1,0 @@
-[1G[0K⠙[1G[0K
-> rest-express@1.0.0 dev
-> NODE_ENV=development npx tsx server/index.ts
-
-[1G[0K⠙[1G[0K[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K[1G[0JNeed to install the following packages:
-tsx@4.21.0
-Ok to proceed? (y) [20G
